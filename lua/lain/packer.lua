@@ -58,8 +58,6 @@ return require('packer').startup(function(use)
         requires = { { 'voldikss/vim-floaterm' } }
     })
 
-    -- use {
-    --     "nvim-telescope/telescope-file-browser.nvim",
-    --     requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-    -- }
+    use('stevearc/dressing.nvim')
+    use('ggandor/leap.nvim')
 end)

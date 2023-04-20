@@ -25,7 +25,6 @@ return require('packer').startup(function(use)
 
     use('ThePrimeagen/harpoon')
     use('mbbill/undotree')
-    use('tpope/vim-fugitive')
 
     use {
         'VonHeikemen/lsp-zero.nvim',
@@ -59,5 +58,18 @@ return require('packer').startup(function(use)
     })
 
     use('stevearc/dressing.nvim')
-    use('ggandor/leap.nvim')
+    use {
+        'ggandor/leap.nvim',
+        config = function()
+            require('leap').add_default_mappings()
+        end
+    }
+
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
+
 end)

@@ -32,3 +32,4 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- vim.keymap.set("n", "<leader><leader>", function()
 --     vim.cmd("so")
 -- end)
+vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)', { noremap = true })

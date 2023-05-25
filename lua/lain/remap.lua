@@ -26,12 +26,51 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<C-p>", function()
+    local fzf = "fd --type f --hidden --follow --exclude .git | fzf"
+    local window_id = vim.fn.systemlist("tmux display-message -p \\#I")[1]
+    -- local command = 'tmux display-popup -d "#{pane_current_path}" -w 100\\% -h 100\\% -E "fzf | xargs -I {} tmux send-keys -t ' .. window_id .. ' \\":edit {}\\" Enter"'
+    local command = 'tmux display-popup -d "#{pane_current_path}" -w 100\\% -h 100\\% -E "' .. fzf .. ' | xargs -I {} tmux send-keys -t ' .. window_id .. ' \\":edit {}\\" Enter"'
+    os.execute(command)
+end)
+vim.keymap.set("n", "<C-s>", '<cmd>silent !tmux display-popup -E "tmux ls | fzf | awk \'{sub(/:.*/, \\"\\"); print $1}\' | xargs tmux switch -t"<CR>');
 vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+function Cmd(...)
+    local command = table.concat({...}, ' ')
+    vim.cmd('split')
+    vim.cmd('wincmd J')
+    vim.cmd('resize 8')
+    vim.cmd('term')
+    vim.cmd('startinsert')
+    if command ~= '' then
+        vim.api.nvim_feedkeys(command .. '\n','n', true)
+        vim.schedule(function()
+            vim.cmd('stopinsert')
+            vim.cmd('wincmd p')
+        end)
+    end
+end
+
+function CloseTerm()
+    vim.cmd('wincmd j')
+    vim.cmd('startinsert')
+    vim.api.nvim_feedkeys('exit\n','n', true)
+    vim.schedule(function()
+        vim.cmd('bd!')
+    end)
+end
+
+vim.cmd('command! -nargs=* Cmd :lua Cmd(<f-args>)')
+vim.cmd('command! -nargs=0 CloseTerm :lua CloseTerm()')
+
+vim.keymap.set('t', '<C-x>', '<C-\\><C-n>');
 
 -- vim.keymap.set("n", "<leader><leader>", function()
 --     vim.cmd("so")
 -- end)
 vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)', { noremap = true })
+vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')

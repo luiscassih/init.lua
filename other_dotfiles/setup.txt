@@ -1,0 +1,17 @@
+== Software to install ==
+kitty
+waybar-hyprland
+starship
+tmux
+ripgrep
+lf
+pcmanfm
+imv
+vlc
+
+
+
+
+== Don't forget these steps ==
+[] Add disk to fstab
+[] mkdir Pictures/Screenshots (for endeavour sway/hyprland)

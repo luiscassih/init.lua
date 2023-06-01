@@ -1,10 +1,12 @@
 alias v=nvim
 alias t=tmux
+alias so="source .zshrc"
 alias tmuxsource="tmux source ~/.config/tmux/tmux.conf"
 alias ta="tmux a -t"
 alias lg="lazygit"
-alias xsc="pbcopy" #mac
+# alias xsc="pbcopy" #mac
 #alias xsc="xclip -selection clipboard" #linux
+alias xsc="wl-copy" #wayland
 
 lt() {
   tree -I "node_modules" "$@" -C | less -r
@@ -29,6 +31,10 @@ lfcd () {
 source ~/.config/lf/icons
 
 export PATH="$HOME/dev/flutter/bin:$PATH"
+
+# Unity
+# needs mono and dotnet-sdk (7.0.3 or above)
+export FrameworkPathOverride=/lib/mono/4.7.1-api
 
 # keep this at the end
 eval "$(starship init zsh)"

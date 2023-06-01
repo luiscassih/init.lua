@@ -8,10 +8,27 @@ lf
 pcmanfm
 imv
 vlc
+fzf
+fd
 
+dotnet (dotnet-sdk 7.0.3 or above)
+mono
+
+rustup
+ttf-firacode-nerd
 
 
 
 == Don't forget these steps ==
 [] Add disk to fstab
 [] mkdir Pictures/Screenshots (for endeavour sway/hyprland)
+
+
+== steps for Unity ==
+[] Mason install csharp-language-server csharp_ls
+[] In Unity set VScode as editor and generate .csproj files for
+    Embedded packages
+    Local Packages
+    Registry Packages
+    Built-in packages
+    Packages from unknown sources

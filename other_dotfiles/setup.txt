@@ -16,12 +16,17 @@ mono
 
 rustup
 ttf-firacode-nerd
+noto-fonts-emoji
+ttf-roboto
+
 
 
 
 == Don't forget these steps ==
 [] Add disk to fstab
 [] mkdir Pictures/Screenshots (for endeavour sway/hyprland)
+
+sudo ln -s /home/l/.config/nvim/other_dotfiles/scripts/ts /usr/bin/ts
 
 
 == steps for Unity ==
@@ -32,3 +37,17 @@ ttf-firacode-nerd
     Registry Packages
     Built-in packages
     Packages from unknown sources
+
+
+
+== steps for android ==
+android-studio
+android-sdk
+android-ndk
+aur/jdk8-temurin
+aur/jdk11-temurin
+aur/jdk17-temurin
+
+sudo archlinux-java set java-17-temurin
+
+

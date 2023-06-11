@@ -139,4 +139,6 @@ return require('packer').startup(function(use)
             require("fidget").setup {}
         end
     })
+
+    use('vimwiki/vimwiki')
 end)

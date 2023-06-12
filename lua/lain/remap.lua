@@ -38,7 +38,7 @@ vim.keymap.set("n", "<C-p>", function()
 end)
 -- vim.keymap.del("n", "<leader>f")
 vim.keymap.set("n", "<leader>lf", function()
-    local cmd = "lfp " .. vim.fn.expand('%')
+    local cmd = "lfp " .. vim.fn.expand('%:p')
     local window_id = vim.fn.systemlist("tmux display-message -p \\#I")[1]
     local command = 'tmux display-popup -d "#{pane_current_path}" -w 100\\% -h 100\\% -E "' .. cmd  .. ' | xargs -I {} tmux send-keys -t ' .. window_id .. ' \\":edit {}\\" Enter"'
     os.execute(command)

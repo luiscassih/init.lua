@@ -9,6 +9,7 @@ alias lg="lazygit"
 # alias xsc="pbcopy" #mac
 #alias xsc="xclip -selection clipboard" #linux
 alias xsc="wl-copy" #wayland
+alias resetsshagent="killall ssh-agent; eval `ssh-agent`"
 
 lt() {
   tree -I "node_modules" "$@" -C | less -r

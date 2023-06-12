@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 lfp() {
   local TEMP=$(mktemp)
-  lf -selection-path=$TEMP
+  lf -selection-path=$TEMP $1
   local PATHS=$(cat $TEMP)
   rm $TEMP
   echo $PATHS
 }
 
-lfp
+lfp $1

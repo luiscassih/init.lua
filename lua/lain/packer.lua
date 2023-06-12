@@ -102,10 +102,10 @@ return require('packer').startup(function(use)
 
     use 'nvim-tree/nvim-web-devicons'
 
-    use({
-        'ptzz/lf.vim',
-        requires = { { 'voldikss/vim-floaterm' } }
-    })
+    -- use({
+    --     'ptzz/lf.vim',
+    --     requires = { { 'voldikss/vim-floaterm' } }
+    -- })
 
     use('stevearc/dressing.nvim')
     use {
@@ -135,6 +135,7 @@ return require('packer').startup(function(use)
 
     use({
         'j-hui/fidget.nvim',
+        tag = 'legacy',
         config = function()
             require("fidget").setup {}
         end

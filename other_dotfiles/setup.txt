@@ -26,8 +26,13 @@ ttf-roboto
 [] Add disk to fstab
 [] mkdir Pictures/Screenshots (for endeavour sway/hyprland)
 
+# linux
 sudo ln -s /home/l/.config/nvim/other_dotfiles/scripts/ts /usr/bin/ts
+sudo ln -s /home/l/.config/nvim/other_dotfiles/scripts/lfp /usr/bin/lfp
 
+# mac
+ln -s /Users/l/.config/nvim/other_dotfiles/scripts/ts /usr/local/bin/ts
+ln -s /Users/l/.config/nvim/other_dotfiles/scripts/lfp /usr/local/bin/lfp
 
 == steps for Unity ==
 [] Mason install csharp-language-server csharp_ls

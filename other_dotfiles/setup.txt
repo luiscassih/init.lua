@@ -29,6 +29,8 @@ ttf-roboto
 # linux
 sudo ln -s /home/l/.config/nvim/other_dotfiles/scripts/ts /usr/bin/ts
 sudo ln -s /home/l/.config/nvim/other_dotfiles/scripts/lfp /usr/bin/lfp
+sudo ln -s /home/l/.config/nvim/other_dotfiles/lf/lfrc /home/l/.config/lf/lfrc
+sudo ln -s /home/l/.config/nvim/other_dotfiles/lf/icons /home/l/.config/lf/icons
 
 # mac
 ln -s /Users/l/.config/nvim/other_dotfiles/scripts/ts /usr/local/bin/ts

@@ -29,6 +29,8 @@ telescope.setup({
   },
 })
 
+telescope.load_extension "file_browser"
+vim.keymap.set('n', '<leader>fb', ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {})
 
 -- local telescope = require('telescope').load_extension("file_browser")
 -- vim.keymap.set('n', '<leader>lf', telescope.file_browser({ path = vim.fn.expand("%:p:h"), select_buffer=true }), { noremap = true })

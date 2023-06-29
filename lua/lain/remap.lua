@@ -86,3 +86,4 @@ vim.keymap.set('t', '<C-x>', '<C-\\><C-n>');
 vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)', { noremap = true })
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')
 vim.keymap.set('n', '<leader>nt', ':Neotree<cr>')
+vim.keymap.set('n', '<leader>o', ':Oil<cr>')

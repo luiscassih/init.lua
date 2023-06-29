@@ -144,7 +144,18 @@ return require('packer').startup(function(use)
     use('vimwiki/vimwiki')
     use {
       'stevearc/oil.nvim',
-      config = function() require('oil').setup() end
+      config = function() require('oil').setup({
+        default_file_explorer = false,
+        use_default_keymaps = false,
+        keymaps = {
+          ['gd'] = "actions.select",
+          ['g?'] = "actions.show.help",
+          ['go'] = "actions.parent",
+          ['gg'] = "actions.open_cwd",
+          ['<leader>cd'] = "actions.tcd",
+          ['<leader>th'] = "actions.toggle_hidden",
+        },
+      }) end
     }
     use {
       "nvim-telescope/telescope-file-browser.nvim",

@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>h", '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>')
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -77,6 +77,7 @@ end
 
 vim.cmd('command! -nargs=* Cmd :lua Cmd(<f-args>)')
 vim.cmd('command! -nargs=0 CloseTerm :lua CloseTerm()')
+vim.cmd('command! -nargs=0 W :w')
 
 vim.keymap.set('t', '<C-x>', '<C-\\><C-n>');
 

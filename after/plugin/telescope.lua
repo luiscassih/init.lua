@@ -17,14 +17,29 @@ end
 vim.keymap.set('v', '<leader>s', "y:lua SearchYanked()<cr>")
 
 local telescope = require('telescope')
-
-telescope.setup({
-  defaults = {
-    layout_config = {
+    local layout_config = {
       width = 0.99,
       height = 0.99,
       prompt_position = 'bottom',
       preview_width = 0.3,
+    }
+
+telescope.setup({
+  pickers = {
+    find_files = {
+      layout_config = layout_config,
+    },
+    git_files = {
+      layout_config = layout_config,
+    },
+    buffers = {
+      layout_config = layout_config,
+    },
+    live_grep = {
+      layout_config = layout_config,
+    },
+    git_status = {
+      layout_config = layout_config,
     },
   },
 })

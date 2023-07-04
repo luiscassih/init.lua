@@ -157,6 +157,7 @@ return require('packer').startup(function(use)
         },
       }) end
     }
+
     use {
       "nvim-telescope/telescope-file-browser.nvim",
       requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
@@ -182,4 +183,6 @@ return require('packer').startup(function(use)
         })
       end
     }
+
+    use('SirVer/ultisnips')
 end)

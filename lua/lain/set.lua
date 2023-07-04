@@ -29,4 +29,5 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
-vim.opt.guifont = {"Iosevka", ":h17" }
+-- vim.opt.guifont = {"Iosevka", ":h17" }
+vim.opt.mouse=""

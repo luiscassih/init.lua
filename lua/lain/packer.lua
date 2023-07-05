@@ -92,7 +92,15 @@ return require('packer').startup(function(use)
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },     -- Required
+            { 'hrsh7th/nvim-cmp',
+              requires = {
+                "quangnguyen30192/cmp-nvim-ultisnips",
+                config = function()
+                  -- optional call to setup (see customization section)
+                  require("cmp_nvim_ultisnips").setup{}
+                end,
+              },
+            },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
             { 'L3MON4D3/LuaSnip' },     -- Required
         }
@@ -145,7 +153,7 @@ return require('packer').startup(function(use)
     use {
       'stevearc/oil.nvim',
       config = function() require('oil').setup({
-        default_file_explorer = false,
+        default_file_explorer = true,
         use_default_keymaps = false,
         keymaps = {
           ['gd'] = "actions.select",
@@ -178,7 +186,8 @@ return require('packer').startup(function(use)
             width = 30,
           },
           filesystem = {
-            follow_current_file = true
+            follow_current_file = true,
+            hijack_netrw_behavior = "disabled",
           }
         })
       end

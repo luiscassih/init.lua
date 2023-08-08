@@ -15,6 +15,9 @@ vim.keymap.set("n", "<C-u>", "8k")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("t", "<C-p>", "<C-\\><C-n>")
+vim.keymap.set("t", "<C-p>", "<C-\\><C-n>")
+vim.keymap.set("t", "H", "^")
+vim.keymap.set("t", "L", "$")
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])

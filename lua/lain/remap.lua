@@ -21,9 +21,10 @@ vim.keymap.set("t", "L", "$")
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set("n", "<leader>P", [["+p]])
 
 -- next greatest remap ever : asbjornHaland
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+ygv]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
@@ -92,3 +93,6 @@ vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)', { noremap = true })
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')
 vim.keymap.set('n', '<leader>nt', ':Neotree<cr>')
 vim.keymap.set('n', '<leader>o', ':Oil<cr>')
+vim.keymap.set('v', '>', '>gv', { noremap = true })
+vim.keymap.set('v', '<', '<gv', { noremap = true })
+vim.keymap.set('v', 'y', 'ygv', { noremap = true })

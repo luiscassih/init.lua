@@ -14,8 +14,7 @@ vim.keymap.set("n", "<C-u>", "8k")
 -- vim.keymap.set("n", "<C-i>", "<C-i>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("t", "<C-p>", "<C-\\><C-n>")
-vim.keymap.set("t", "<C-p>", "<C-\\><C-n>")
+vim.keymap.set("t", "<C-c><C-c>", "<C-\\><C-n>")
 vim.keymap.set("t", "H", "^")
 vim.keymap.set("t", "L", "$")
 
@@ -23,11 +22,14 @@ vim.keymap.set("t", "L", "$")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("n", "<leader>P", [["+p]])
 
+-- prevent x and d to rewrite yanked register
+vim.keymap.set("n", "x", [["_x]])
+vim.keymap.set({ "n", "v" }, "d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["0d]])
+
 -- next greatest remap ever : asbjornHaland
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+ygv]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
-
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- This is going to get me cancelled
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -83,8 +85,6 @@ end
 vim.cmd('command! -nargs=* Cmd :lua Cmd(<f-args>)')
 vim.cmd('command! -nargs=0 CloseTerm :lua CloseTerm()')
 vim.cmd('command! -nargs=0 W :w')
-
-vim.keymap.set('t', '<C-x>', '<C-\\><C-n>');
 
 -- vim.keymap.set("n", "<leader><leader>", function()
 --     vim.cmd("so")

@@ -28,22 +28,22 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
   ['<cr>'] = cmp.mapping.confirm({ select = true }),
   ["<C-Space>"] = cmp.mapping.complete(),
-  ["<Tab>"] = cmp.mapping(
-  function(fallback)
-    cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-  end,
-  { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-  ),
-  ["<S-Tab>"] = cmp.mapping(
-  function(fallback)
-    cmp_ultisnips_mappings.jump_backwards(fallback)
-  end,
-  { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-  ),
+  -- ["<Tab>"] = cmp.mapping(
+  -- function(fallback)
+  --   cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+  -- end,
+  -- { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+  -- ),
+  -- ["<S-Tab>"] = cmp.mapping(
+  -- function(fallback)
+  --   cmp_ultisnips_mappings.jump_backwards(fallback)
+  -- end,
+  -- { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+  -- ),
 })
 
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
+-- cmp_mappings['<Tab>'] = nil
+-- cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings,

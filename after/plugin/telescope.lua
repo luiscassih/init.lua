@@ -2,6 +2,7 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
 vim.keymap.set('n', '<leader>pb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>pM', builtin.marks, {})
 vim.keymap.set('n', '<leader>pg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
 -- vim.keymap.set('n', '<C-p>', builtin.git_files, {})
@@ -45,7 +46,9 @@ telescope.setup({
 })
 
 telescope.load_extension "file_browser"
+telescope.load_extension "harpoon"
 vim.keymap.set('n', '<leader>fb', ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {})
+vim.keymap.set('n', '<leader>pm', ":Telescope harpoon marks<CR>", {})
 
 -- local telescope = require('telescope').load_extension("file_browser")
 -- vim.keymap.set('n', '<leader>lf', telescope.file_browser({ path = vim.fn.expand("%:p:h"), select_buffer=true }), { noremap = true })

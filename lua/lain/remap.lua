@@ -27,6 +27,8 @@ vim.keymap.set("n", "x", [["_x]])
 vim.keymap.set({ "n", "v" }, "d", [["_d]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["0d]])
 
+vim.keymap.set({ "n", "v" }, "H", "^")
+vim.keymap.set({ "n", "v" }, "L", "$")
 -- next greatest remap ever : asbjornHaland
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+ygv]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
@@ -86,10 +88,29 @@ vim.cmd('command! -nargs=* Cmd :lua Cmd(<f-args>)')
 vim.cmd('command! -nargs=0 CloseTerm :lua CloseTerm()')
 vim.cmd('command! -nargs=0 W :w')
 
+
+-- function Marks()
+--   local marks = vim.fn.execute('marks "')
+--   for _, line in ipairs(vim.fn.split(marks, '\n')) do
+--     local mark, file_path = line:match('^%s*([a-zA-Z0-9%%<>.]+)%s+(.+)$')
+--     if mark and file_path then
+--       local fzf_command = string.format('FZF_DEFAULT_OPTS="--preview \'bat --color=always --style=header,grid --line-range :100 {}\'" rg --files --no-ignore --hidden %s', vim.fn.shellescape(file_path))
+--       -- Run the FZF command and get the selected file
+--       local selected_file = vim.fn.systemlist(fzf_command)[1]
+--       -- If a file is selected, open it in a new buffer
+--       if selected_file then
+--         -- vim.cmd('edit ' .. selected_file)
+--         print('file: '.. selected_file)
+--       end
+--     end
+--   end
+-- end
+
+
 -- vim.keymap.set("n", "<leader><leader>", function()
 --     vim.cmd("so")
 -- end)
-vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)', { noremap = true })
+-- vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)', { noremap = true })
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')
 vim.keymap.set('n', '<leader>nt', ':Neotree<cr>')
 vim.keymap.set('n', '<leader>o', ':Oil<cr>')

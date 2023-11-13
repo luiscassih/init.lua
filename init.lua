@@ -1,1 +1,2 @@
-require('lain')
+require('lain.core')
+require('lain.lazy')

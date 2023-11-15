@@ -1,0 +1,10 @@
+#!/bin/sh
+
+_file="$(rg --line-number --no-heading --smart-case "${@:-^[^\n]}" \
+    | fzf -d ':' --preview 'bat --style=numbers $(cut -d: -f1 <<< {1}) --highlight-line {2}  --line-range={2}:+20' \
+    --preview-window='50%' --height='50%' --with-nth 1,3.. --exact)"
+
+_file="${_file%%:*}"
+[ -z "$_file" ] && exit
+echo "$_file"
+# exec nvim "$_file"

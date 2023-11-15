@@ -89,6 +89,35 @@ vim.cmd('command! -nargs=0 CloseTerm :lua CloseTerm()')
 vim.cmd('command! -nargs=0 W :w')
 
 
+function SplitTri()
+  vim.cmd('vsplit')
+  vim.cmd('vertical resize +20')
+  vim.cmd('wincmd l')
+  vim.cmd('split')
+  vim.cmd('resize +8')
+  vim.cmd('wincmd j')
+  CheckTermBuffer()
+end
+
+function CheckTermBuffer()
+  for _, buf in ipairs(vim.fn.getbufinfo()) do
+    if vim.fn.bufname(buf.bufnr):match("term://") then
+      local winid = vim.fn.bufwinid(buf.bufnr)
+      if winid ~= -1 then
+        vim.api.nvim_set_current_win(winid)
+      else
+        -- If the terminal buffer is not currently open in any window,
+        -- you can handle it here (e.g., open a new split).
+        -- vim.cmd('split | buffer ' .. buf.bufnr)
+        vim.api.nvim_set_current_buf(buf.bufnr)
+      end
+      return
+    end
+  end
+end
+
+vim.cmd('command! -nargs=0 Tri :lua SplitTri()')
+
 -- function Marks()
 --   local marks = vim.fn.execute('marks "')
 --   for _, line in ipairs(vim.fn.split(marks, '\n')) do

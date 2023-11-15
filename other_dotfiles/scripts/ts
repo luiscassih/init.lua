@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-  selected=$((find ~/dev /mnt/DATA/dev -mindepth 1 -maxdepth 1 -type d; echo /home/l/.config/nvim; echo /home/l/vimwiki) | fzf)
+  selected=$((find ~/dev /mnt/DATA/dev -mindepth 1 -maxdepth 1 -type d; echo /home/l/.config/nvim; echo /mnt/DATA/Videos) | fzf)
 fi
 
 if [[ -z $selected ]]; then

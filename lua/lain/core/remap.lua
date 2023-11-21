@@ -118,28 +118,53 @@ end
 
 vim.cmd('command! -nargs=0 Tri :lua SplitTri()')
 
--- function Marks()
---   local marks = vim.fn.execute('marks "')
---   for _, line in ipairs(vim.fn.split(marks, '\n')) do
---     local mark, file_path = line:match('^%s*([a-zA-Z0-9%%<>.]+)%s+(.+)$')
---     if mark and file_path then
---       local fzf_command = string.format('FZF_DEFAULT_OPTS="--preview \'bat --color=always --style=header,grid --line-range :100 {}\'" rg --files --no-ignore --hidden %s', vim.fn.shellescape(file_path))
---       -- Run the FZF command and get the selected file
---       local selected_file = vim.fn.systemlist(fzf_command)[1]
---       -- If a file is selected, open it in a new buffer
---       if selected_file then
---         -- vim.cmd('edit ' .. selected_file)
---         print('file: '.. selected_file)
---       end
---     end
---   end
--- end
+-- based on a mixture from
+-- https://stackoverflow.com/a/77181885
+-- https://stackoverflow.com/a/74675717
+function RemoveQFItem(mode)
+  local qf_list = vim.fn.getqflist()
 
+  -- Distinguish mode for getting delete index and delete count
+  local del_qf_idx
+  local del_ct
+  if mode == 'v' then
+    del_qf_idx = vim.fn.getpos("'<")[2] - 1
+    del_ct = vim.fn.getpos("'>")[2] - del_qf_idx
+  else
+    del_qf_idx = vim.fn.line('.') - 1
+    del_ct = vim.v.count > 1 and vim.v.count or 1
+  end
 
--- vim.keymap.set("n", "<leader><leader>", function()
---     vim.cmd("so")
--- end)
--- vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)', { noremap = true })
+  -- Delete lines and update quickfix
+  for _ = 1, del_ct do
+    table.remove(qf_list, del_qf_idx + 1)
+  end
+
+  vim.fn.setqflist(qf_list, 'r')
+
+  if #qf_list > 0 then
+    -- vim.cmd(tostring(del_qf_idx + 1) .. 'cfirst')
+    vim.cmd('copen')
+  else
+    vim.cmd('cclose')
+  end
+
+  -- If not at the end of the list, stay at the same index, otherwise, go one up.
+  local new_idx = del_qf_idx < #qf_list and del_qf_idx+1 or math.max(del_qf_idx, 1)
+  local winid = vim.fn.win_getid() -- Get the window ID of the quickfix window
+  vim.api.nvim_win_set_cursor(winid, {new_idx, 0})
+end
+
+-- vim.api.nvim_exec([[
+--   augroup QuickFixRemove
+--     autocmd!
+--     autocmd FileType qf nmap <buffer> dd :lua RemoveQFItem('n')<CR>
+--     autocmd FileType qf vmap <buffer> d :lua RemoveQFItem('v')<CR>
+--   augroup END
+-- ]], true)
+vim.api.nvim_command("autocmd FileType qf nnoremap <buffer> dd :lua RemoveQFItem('n')<cr>")
+vim.api.nvim_command("autocmd FileType qf vnoremap <buffer> d :lua RemoveQFItem('v')<cr>")
+
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')
 vim.keymap.set('n', '<leader>nt', ':Neotree<cr>')
 vim.keymap.set('n', '<leader>o', ':Oil<cr>')

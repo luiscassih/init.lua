@@ -37,7 +37,11 @@ return {
       on_attach = on_attach,
     }
 
-    lspconfig.tsserver.setup { default_opts }
+    lspconfig.tsserver.setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
     lspconfig.rust_analyzer.setup {
       capabilities = capabilities,
       on_attach = on_attach,

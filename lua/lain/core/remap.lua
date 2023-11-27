@@ -42,6 +42,9 @@ vim.keymap.set("n", "<C-p>", function()
     local fzf = "fd --type f --hidden --follow --exclude .git | fzf"
     local window_id = vim.fn.systemlist("tmux display-message -p \\#I")[1]
     -- local command = 'tmux display-popup -d "#{pane_current_path}" -w 100\\% -h 100\\% -E "fzf | xargs -I {} tmux send-keys -t ' .. window_id .. ' \\":edit {}\\" Enter"'
+    -- TODO: instead of opening the file, copy the full path to clipboard, or yank
+    -- That way we can use C-f to open a file and C-p to search look for a path to paste in any require or code
+    -- use SendFidgetNotification when successfuly copied
     local command = 'tmux display-popup -d "#{pane_current_path}" -w 100\\% -h 100\\% -E "' .. fzf .. ' | xargs -I {} tmux send-keys -t ' .. window_id .. ' \\":edit {}\\" Enter"'
     os.execute(command)
 end)
@@ -97,6 +100,11 @@ function SplitTri()
   vim.cmd('resize +8')
   vim.cmd('wincmd j')
   CheckTermBuffer()
+end
+
+function SendFidgetNotification(msg, ttl)
+  local fidget = require('fidget')
+  fidget.notify(msg, vim.log.levels.INFO, { ttl = ttl or 5})
 end
 
 function CheckTermBuffer()

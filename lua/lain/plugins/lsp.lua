@@ -37,6 +37,8 @@ return {
       on_attach = on_attach,
     }
 
+    lspconfig.dartls.setup(default_opts)
+
     lspconfig.tsserver.setup {
       capabilities = capabilities,
       on_attach = on_attach,

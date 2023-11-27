@@ -43,6 +43,7 @@ export FrameworkPathOverride=/lib/mono/4.7.1-api
 
 export NDK_HOME="/opt/android-ndk"
 export ANDROID_HOME=/home/l/Android/Sdk
+export CHROME_EXECUTABLE="/var/lib/flatpak/app/com.google.Chrome/current/active/export/bin/com.google.Chrome"
 
 export PATH="${PATH}:/opt/flutter/bin"
 

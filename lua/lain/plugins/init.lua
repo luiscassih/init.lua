@@ -57,19 +57,9 @@ return {
     end
   },
 
-  'tpope/vim-commentary',
+  -- 'tpope/vim-commentary',
   'nvim-tree/nvim-web-devicons',
   'stevearc/dressing.nvim',
-  {
-    'akinsho/flutter-tools.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'stevearc/dressing.nvim', -- optional for vim.ui.select
-    },
-    config = function()
-      require("flutter-tools").setup {}
-    end
-  },
 
   {
     'j-hui/fidget.nvim',
@@ -79,7 +69,6 @@ return {
     end
   },
 
-  'vimwiki/vimwiki',
   {
     'stevearc/oil.nvim',
     config = function()
@@ -91,8 +80,8 @@ return {
           ['g?'] = "actions.show.help",
           ['go'] = "actions.parent",
           ['gg'] = "actions.open_cwd",
-          ['<leader>cd'] = "actions.tcd",
-          ['<leader>th'] = "actions.toggle_hidden",
+          ['cd'] = "actions.tcd",
+          ['gh'] = "actions.toggle_hidden",
         },
       })
     end

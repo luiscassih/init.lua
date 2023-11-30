@@ -14,7 +14,12 @@ vim.keymap.set("n", "<C-u>", "8k")
 -- vim.keymap.set("n", "<C-i>", "<C-i>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("t", "<C-c><C-c>", "<C-\\><C-n>")
+
+-- vim.keymap.set("t", "<C-c><C-c>", "<C-\\><C-n>")
+-- Use once to exit, and twice to send C-c (cancel command)
+vim.keymap.set("t", "<C-c>", "<C-\\><C-n>")
+vim.keymap.set("t", "<C-c><C-c>", "<C-c>")
+
 vim.keymap.set("t", "H", "^")
 vim.keymap.set("t", "L", "$")
 
@@ -107,6 +112,45 @@ function SendFidgetNotification(msg, ttl)
   fidget.notify(msg, vim.log.levels.INFO, { ttl = ttl or 5})
 end
 
+local getTermBuffer = function ()
+  for _, buf in ipairs(vim.fn.getbufinfo()) do
+    if vim.fn.bufname(buf.bufnr):match("term://") then
+      return buf.bufnr
+    end
+  end
+end
+
+function SendKeysToTerm(commands)
+  local buf = getTermBuffer()
+  if buf ~= nil then
+    -- vim.api.nvim_buf_call(buf, function()
+    --   vim.api.nvim_feedkeys(commands, 'i', true)
+    -- end)
+    -- vim.api.nvim_buf_attach(buf, false, {
+    --   on_lines = function(_, _, _, _, _, _)
+    --     vim.api.nvim_feedkeys(commands, 'i', true)
+    --   end
+    -- })
+    local winid = vim.fn.bufwinid(buf)
+    if winid ~= -1 then
+      vim.api.nvim_set_current_win(winid)
+      local cmds = vim.api.nvim_replace_termcodes('i' .. commands .. '<CR><C-\\><C-n>', false, true, true)
+      vim.api.nvim_feedkeys(cmds, 'i', true)
+    end
+  end
+end
+
+
+-- Detect filetype, example: Dart
+-- read file dart.txt from termcommands/ folder in config
+-- list every line in FZF
+-- SendKeysToTerm(selected)
+
+function InputToTerm()
+  -- get type of file
+end
+
+
 function CheckTermBuffer()
   for _, buf in ipairs(vim.fn.getbufinfo()) do
     if vim.fn.bufname(buf.bufnr):match("term://") then
@@ -125,6 +169,10 @@ function CheckTermBuffer()
 end
 
 vim.cmd('command! -nargs=0 Tri :lua SplitTri()')
+
+
+-- TODO
+-- function to search :h for the selected text
 
 -- based on a mixture from
 -- https://stackoverflow.com/a/77181885

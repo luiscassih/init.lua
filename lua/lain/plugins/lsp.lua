@@ -21,7 +21,7 @@ return {
       vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.references() end, opts)
       vim.keymap.set("n", "<leader>lR", function() vim.lsp.buf.rename() end, opts)
       vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-      vim.keymap.set("n", "<leader>rs", ":LspRestart", opts)
+      vim.keymap.set("n", "<leader>R", ":LspRestart", opts)
     end
     local capabilities = cmp_nvim_lsp.default_capabilities()
 

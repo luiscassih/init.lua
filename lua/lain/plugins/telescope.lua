@@ -20,7 +20,7 @@ return {
       builtin.grep_string({ search = yanked });
     end
 
-    vim.keymap.set('v', '<leader>s', "y:lua SearchYanked()<cr>")
+    vim.keymap.set('v', '<leader>/', "y:lua SearchYanked()<cr>")
 
     local telescope = require('telescope')
     local layout_config = {

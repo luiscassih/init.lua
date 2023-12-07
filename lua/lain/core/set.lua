@@ -32,3 +32,9 @@ vim.opt.colorcolumn = "80"
 -- vim.opt.guifont = {"Iosevka", ":h17" }
 -- vim.opt.mouse=""
 vim.opt.mouse="nvi"
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end
+})

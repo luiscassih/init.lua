@@ -132,3 +132,96 @@ function RemoveQFItem(mode)
   local winid = vim.fn.win_getid() -- Get the window ID of the quickfix window
   vim.api.nvim_win_set_cursor(winid, {new_idx, 0})
 end
+
+
+function CreateFloatWindow(opts)
+  local relative = opts.relative or 'editor'
+  local columns, lines = vim.o.columns, vim.o.lines
+  if relative == 'win' then
+    columns, lines = vim.api.nvim_win_get_width(0), vim.api.nvim_win_get_height(0)
+  end
+
+  local win_opts = {
+    width = opts.width or math.min(columns - 4, math.max(80, columns - 20)),
+    height = opts.height or math.min(lines - 4, math.max(80, lines - 10)),
+    style = 'minimal',
+    relative = relative,
+    border = opts.border
+  }
+
+  win_opts.row = opts.row or math.floor(((lines - win_opts.height) / 2 ) - 1)
+  win_opts.col = opts.col or math.floor((columns - win_opts.width) / 2)
+
+  if opts.title then
+    win_opts.title = opts.title
+    win_opts.title_pos = opts.title_pos or 'center'
+  end
+
+  local bufnr = vim.api.nvim_create_buf(false, true)
+  local winid = vim.api.nvim_open_win(bufnr, true, win_opts)
+
+  if opts.window_on_create then
+    opts.window_on_create()
+  end
+
+  return bufnr, winid
+end
+
+function TestFloatWindow()
+  local win = vim.api.nvim_get_current_win()
+  local bufnr, winid = CreateFloatWindow({})
+  -- open new float window
+  vim.api.nvim_win_set_buf(winid, bufnr)
+
+  -- set map for only this float window
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<esc>', '<cmd>close<CR>', { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-c>', '<cmd>close<CR>', { noremap = true, silent = true })
+
+end
+
+-- TODO an alternative window of harpoon list (C-e) but using fzf?
+
+function TestFZF()
+  local fzf = require('fzf')
+  coroutine.wrap(function()
+    local result = fzf.fzf({"uno", "dos", "tres"}, "--ansi")
+    if result then
+      SendFidgetNotification(result[1])
+      result = fzf.fzf({"cuatro", "cinco", "seis"}, "--ansi")
+      vim.cmd('startinsert')
+      if result then
+        SendFidgetNotification(result[1])
+      end
+    end
+  end)()
+end
+
+function WaitForCoroutine(routine, callback)
+  coroutine.resume(routine)
+  if coroutine.status(routine) == 'dead' then
+    callback()
+  else
+    vim.defer_fn(function()
+      WaitForCoroutine(routine, callback)
+    end, 10)
+  end
+end
+
+function TestFZF2()
+  local fzf = require('fzf')
+  local routine = coroutine.create(function ()
+    local result = fzf.fzf({"uno", "dos", "tres"}, "--ansi")
+    if result then
+      SendFidgetNotification(result[1])
+    end
+  end)
+  WaitForCoroutine(routine, function()
+    routine = coroutine.create(function ()
+      local result = fzf.fzf({"cuatro", "cinco", "seis"}, "--ansi")
+      if result then
+        SendFidgetNotification(result[1])
+      end
+    end)
+  end)
+end

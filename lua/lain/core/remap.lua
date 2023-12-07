@@ -30,6 +30,7 @@ vim.keymap.set("n", "<leader>P", [["+p]])
 -- prevent x and d to rewrite yanked register
 vim.keymap.set("n", "x", [["_x]])
 vim.keymap.set({ "n", "v" }, "d", [["_d]])
+vim.keymap.set({ "n", "v" }, "c", [["_c]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["0d]])
 
 vim.keymap.set({ "n", "v" }, "H", "^")
@@ -86,6 +87,12 @@ vim.api.nvim_command("autocmd FileType qf vnoremap <buffer> d :lua RemoveQFItem(
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')
 vim.keymap.set('n', '<leader>nt', ':Neotree<cr>')
 vim.keymap.set('n', '<leader>o', ':Oil<cr>')
+vim.keymap.set('n', '>>', '<C-w>10>', { noremap = true })
+vim.keymap.set('n', '<<', '<C-w>10<', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', 'y', 'ygv', { noremap = true })
+
+-- Let's make it easier to move in wrapped lines
+vim.keymap.set('n', 'j', [[v:count? 'j' : 'gj']], { noremap = true, expr = true })
+vim.keymap.set('n', 'k', [[v:count? 'k' : 'gk']], { noremap = true, expr = true })

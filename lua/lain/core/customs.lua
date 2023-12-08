@@ -38,7 +38,7 @@ function SendFidgetNotification(msg, ttl)
   fidget.notify(msg, vim.log.levels.INFO, { ttl = ttl or 5})
 end
 
-local getTermBuffer = function ()
+function GetTermBuffer()
   for _, buf in ipairs(vim.fn.getbufinfo()) do
     if vim.fn.bufname(buf.bufnr):match("term://") then
       return buf.bufnr
@@ -47,7 +47,7 @@ local getTermBuffer = function ()
 end
 
 function SendKeysToTerm(commands)
-  local buf = getTermBuffer()
+  local buf = GetTermBuffer()
   if buf ~= nil then
     -- vim.api.nvim_buf_call(buf, function()
     --   vim.api.nvim_feedkeys(commands, 'i', true)

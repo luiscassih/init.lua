@@ -70,7 +70,10 @@ vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- My own solution to Ctrl-D implementation of substitution, it uses the x register to store the word
 vim.keymap.set("n", "<leader>s", [[:let @x = "<C-r><C-w>"<Enter>V]])
+-- s will replace the coincidence, even if it's part of another word
 vim.keymap.set("v", "<leader>s", [[:s/<C-r>x//g<Left><Left>]])
+-- S will replace only words, ideal for refactor a variable only in that visual block
+vim.keymap.set("v", "<leader>S", [[:s/\<<C-r>x\>//g<Left><Left>]])
 
 -- this is the same but it will overwrite the default yanked register
 -- vim.keymap.set("n", "<leader>s", [[yiwV]])
@@ -94,26 +97,24 @@ vim.api.nvim_command("autocmd FileType qf vnoremap <buffer> d :lua RemoveQFItem(
 
 -- vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')
 -- maximize a terminal buffer, open if not exists
--- TODO refactor using GetTermBuffer
 vim.keymap.set('n', '<C-f>', function ()
-  for _, buf in ipairs(vim.fn.getbufinfo()) do
-    if vim.fn.bufname(buf.bufnr):match("term://") then
-      local winid = vim.fn.bufwinid(buf.bufnr)
-      if winid ~= -1 then
-        -- terminal buffer window exist, so focus
-        vim.api.nvim_set_current_win(winid)
-      else
-        -- If the terminal buffer exists but is not currently open in any window,
-        -- open it in a new split
-        vim.cmd('wincmd l') -- make sure we are at right window
-        vim.cmd("split")
-        vim.cmd('wincmd j')
-        vim.api.nvim_set_current_buf(buf.bufnr)
-      end
-      -- after focusing of a terminal, maximize it
-      vim.cmd("MaximizerToggle")
-      return
+  local bufnr = GetTermBuffer()
+  if bufnr ~= nil then
+    local winid = vim.fn.bufwinid(bufnr)
+    if winid ~= -1 then
+      -- terminal buffer window exist, so focus
+      vim.api.nvim_set_current_win(winid)
+    else
+      -- If the terminal buffer exists but is not currently open in any window,
+      -- open it in a new split
+      vim.cmd('wincmd l') -- make sure we are at right window
+      vim.cmd("split")
+      vim.cmd('wincmd j')
+      vim.api.nvim_set_current_buf(bufnr)
     end
+    -- after focusing of a terminal, maximize it
+    vim.cmd("MaximizerToggle")
+    return
   end
   -- there's no terminal, so open it
   vim.cmd('wincmd l')
@@ -121,9 +122,6 @@ vim.keymap.set('n', '<C-f>', function ()
   vim.cmd('wincmd j')
   vim.cmd("term")
   vim.cmd("MaximizerToggle")
-  -- end
-  -- vim.cmd([[<c-w>v<c-w>l]])
-  -- CheckTermBuffer()
 end)
 
 vim.keymap.set('n', '<leader>nt', ':Neotree<cr>')

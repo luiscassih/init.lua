@@ -128,9 +128,22 @@ vim.keymap.set('n', '<leader>nt', ':Neotree<cr>')
 vim.keymap.set('n', '<leader>o', ':Oil<cr>')
 vim.keymap.set('n', '>>', '<C-w>10>', { noremap = true })
 vim.keymap.set('n', '<<', '<C-w>10<', { noremap = true })
+vim.keymap.set('n', '<C-w>,', '<C-w>5+', { noremap = true })
+vim.keymap.set('n', '<C-w>.', '<C-w>5-', { noremap = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true })
 vim.keymap.set('v', '<', '<gv', { noremap = true })
 vim.keymap.set('v', 'y', 'ygv', { noremap = true })
+
+-- View help for the word under the cursor
+vim.keymap.set('n', '<leader>vh', [[:h <C-r><C-w><Enter>]], { noremap = true })
+
+vim.keymap.set('n', '<leader>q', function ()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "quickfix" then
+    vim.cmd("cclose")
+  else
+    vim.cmd("copen")
+  end
+end)
 
 -- Let's make it easier to move in wrapped lines
 vim.keymap.set('n', 'j', [[v:count? 'j' : 'gj']], { noremap = true, expr = true })

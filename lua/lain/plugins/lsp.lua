@@ -38,6 +38,8 @@ return {
     }
 
     lspconfig.dartls.setup(default_opts)
+    lspconfig.gdscript.setup(default_opts)
+    lspconfig.eslint.setup(default_opts)
 
     lspconfig.tsserver.setup {
       capabilities = capabilities,

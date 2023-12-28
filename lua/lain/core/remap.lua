@@ -85,6 +85,14 @@ vim.cmd('command! -nargs=0 W :w')
 
 vim.cmd('command! -nargs=0 Tri :lua SplitTri()')
 
+-- yank ñ to the clipboard
+-- vim.cmd('command! -nargs=0 Enie :call setreg("+", "ñ")')
+vim.cmd('command! -nargs=0 Enie :let @+ = "ñ"')
+vim.cmd('command! -nargs=0 EnieN :let @+ = "Ñ"')
+-- copy ñ
+vim.keymap.set("n", "<leader>cn", ":Enie<CR>")
+vim.keymap.set("n", "<leader>cN", ":EnieN<CR>")
+
 -- vim.api.nvim_exec([[
 --   augroup QuickFixRemove
 --     autocmd!
@@ -94,6 +102,7 @@ vim.cmd('command! -nargs=0 Tri :lua SplitTri()')
 -- ]], true)
 vim.api.nvim_command("autocmd FileType qf nnoremap <buffer> dd :lua RemoveQFItem('n')<cr>")
 vim.api.nvim_command("autocmd FileType qf vnoremap <buffer> d :lua RemoveQFItem('v')<cr>")
+vim.api.nvim_command("autocmd FileType gdscript setlocal tabstop=4 shiftwidth=4 foldmethod=expr indentexpr= noexpandtab")
 
 -- vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')
 -- maximize a terminal buffer, open if not exists

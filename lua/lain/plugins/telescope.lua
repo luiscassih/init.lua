@@ -10,8 +10,15 @@ return {
     vim.keymap.set('n', '<leader>pM', builtin.marks, {})
     vim.keymap.set('n', '<leader>pg', builtin.live_grep, {})
     vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
+    vim.keymap.set('n', '<leader>ph', builtin.help_tags, {})
+    vim.keymap.set('n', '<leader>pH', builtin.highlights, {})
+    vim.keymap.set('n', '<leader>ps', builtin.lsp_document_symbols, {})
+    vim.keymap.set('n', '<leader>pr', builtin.lsp_references, {})
+    vim.keymap.set('n', '<leader>pd', builtin.diagnostics, {})
+    vim.keymap.set('n', '<leader>pc', builtin.commands, {})
+    vim.keymap.set('n', '<leader>pt', builtin.filetypes, {})
     -- vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-    vim.keymap.set('n', '<leader>ps', function()
+    vim.keymap.set('n', '<leader>pG', function()
       builtin.grep_string({ search = vim.fn.input('Grep > ') });
     end)
 

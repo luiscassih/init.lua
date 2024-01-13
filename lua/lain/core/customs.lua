@@ -225,3 +225,10 @@ function TestFZF2()
     end)
   end)
 end
+
+function VisualToText()
+  local start_row, start_col, end_row, end_col = vim.fn.getpos("'<")[2], vim.fn.getpos("'<")[3], vim.fn.getpos("'>")[2], vim.fn.getpos("'>")[3]
+  local lines = vim.fn.getline(start_row, end_row)
+  local selected_characters = string.sub(lines[1], start_col, end_col)
+  return selected_characters
+end

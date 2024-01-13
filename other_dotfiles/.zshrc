@@ -47,5 +47,8 @@ export CHROME_EXECUTABLE="/var/lib/flatpak/app/com.google.Chrome/current/active/
 
 export PATH="${PATH}:/opt/flutter/bin"
 
+# Mason
+export PATH="$PATH:/home/l/.local/share/nvim/mason/bin:$PATH"
+
 # keep this at the end
 eval "$(starship init zsh)"

@@ -30,7 +30,7 @@ vim.keymap.set("n", "<leader>P", [["+p]])
 -- prevent x and d to rewrite yanked register
 vim.keymap.set("n", "x", [["_x]])
 vim.keymap.set({ "n", "v" }, "d", [["_d]])
-vim.keymap.set({ "n", "v" }, "c", [["_c]])
+-- vim.keymap.set({ "n", "v" }, "c", [["_c]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["0d]])
 
 vim.keymap.set({ "n", "v" }, "H", "^")
@@ -44,6 +44,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+--[[
 vim.keymap.set("n", "<C-p>", function()
     local fzf = "fd --type f --hidden --follow --exclude .git | fzf"
     local window_id = vim.fn.systemlist("tmux display-message -p \\#I")[1]
@@ -54,6 +55,7 @@ vim.keymap.set("n", "<C-p>", function()
     local command = 'tmux display-popup -d "#{pane_current_path}" -w 100\\% -h 100\\% -E "' .. fzf .. ' | xargs -I {} tmux send-keys -t ' .. window_id .. ' \\":edit {}\\" Enter"'
     os.execute(command)
 end)
+--]]
 -- vim.keymap.del("n", "<leader>f")
 vim.keymap.set("n", "<leader>lf", function()
     local cmd = "lfp " .. vim.fn.expand('%:p')
@@ -106,7 +108,7 @@ vim.api.nvim_command("autocmd FileType gdscript setlocal tabstop=4 shiftwidth=4 
 
 -- vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')
 -- maximize a terminal buffer, open if not exists
-vim.keymap.set('n', '<C-f>', function ()
+vim.keymap.set('n', '<C-t>', function ()
   local bufnr = GetTermBuffer()
   if bufnr ~= nil then
     local winid = vim.fn.bufwinid(bufnr)

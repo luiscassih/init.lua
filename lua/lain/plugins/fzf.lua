@@ -11,7 +11,7 @@ return {
     vim.keymap.set("n", "<C-p>", ":Files<CR>", { noremap = true })
     vim.keymap.set("n", "<C-b>", ":Buffers<CR>", { noremap = true })
     vim.keymap.set("n", "<C-f>", ":Rg<CR>", { noremap = true })
-    vim.env.FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+    vim.env.FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git"'
     vim.env.FZF_DEFAULT_OPTS = '--bind ctrl-e:select-all,ctrl-d:deselect-all'
     vim.g.fzf_preview_window = ''
     vim.g.fzf_layout = {

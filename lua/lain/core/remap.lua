@@ -65,7 +65,9 @@ vim.keymap.set("n", "<leader>lf", function()
 end)
 
 -- vim.keymap.set("n", "<C-s>", '<cmd>silent !tmux display-popup -E "tmux ls | fzf | awk \'{sub(/:.*/, \\"\\"); print $1}\' | xargs tmux switch -t"<CR>');
-vim.keymap.set("n", "<C-s>", '<cmd>silent !tmux display-popup -w 100\\% -h 100\\% -E "ts"<CR>');
+
+-- removed, using binding directly in tmux conf
+-- vim.keymap.set("n", "<C-s>", '<cmd>silent !tmux display-popup -w 100\\% -h 40\\% -E "ts"<CR>');
 vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -159,3 +161,6 @@ end)
 -- Let's make it easier to move in wrapped lines
 vim.keymap.set('n', 'j', [[v:count? 'j' : 'gj']], { noremap = true, expr = true })
 vim.keymap.set('n', 'k', [[v:count? 'k' : 'gk']], { noremap = true, expr = true })
+
+-- cd to current file
+vim.keymap.set('n', '<leader>cd', ':cd %:p:h<cr>:pwd<cr>')

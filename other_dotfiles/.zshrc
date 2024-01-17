@@ -10,6 +10,9 @@ alias lg="lazygit"
 #alias xsc="xclip -selection clipboard" #linux
 alias xsc="wl-copy" #wayland
 alias resetsshagent="killall ssh-agent; eval `ssh-agent`"
+alias s='rg --files --hidden --glob "!.git" | fzf'
+alias sd='cd $(s | xargs dirname)'
+alias sv='nvim $(s)'
 
 lt() {
   tree -I "node_modules" "$@" -C | less -r
@@ -34,7 +37,12 @@ lfcd () {
 source ~/.config/lf/icons
 source "$HOME/.cargo/env"
 
+export CHROME_EXECUTABLE="/var/lib/flatpak/app/com.google.Chrome/current/active/export/bin/com.google.Chrome"
+
 export PATH="$HOME/dev/flutter/bin:$PATH"
+
+# For invokeAI AMD GPU
+export HSA_OVERRIDE_GFX_VERSION=10.3.0
 
 # Unity
 # needs mono and dotnet-sdk (7.0.3 or above)
@@ -46,6 +54,7 @@ export ANDROID_HOME=/home/l/Android/Sdk
 export CHROME_EXECUTABLE="/var/lib/flatpak/app/com.google.Chrome/current/active/export/bin/com.google.Chrome"
 
 export PATH="${PATH}:/opt/flutter/bin"
+export PATH="$PATH:$(go env GOPATH)/bin"
 
 # Mason
 export PATH="$PATH:/home/l/.local/share/nvim/mason/bin:$PATH"

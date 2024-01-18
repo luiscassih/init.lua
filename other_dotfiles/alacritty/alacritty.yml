@@ -1,0 +1,27 @@
+live_config_reload: true
+
+env:
+  TERM: xterm-256color
+font:
+  size: 18
+  normal:
+    family: "Hack Nerd Font"
+    style: "Regular"
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+window:
+  dimensions:
+    columns: 100
+    lines: 30
+  opacity: 0.95
+  padding:
+    x: 0
+    y: 0
+  dynamic_padding: false
+mouse:
+  hide_when_typing: true
+colors:
+  primary:
+    background: "#121212"
+    foreground: "#f8f8f2"

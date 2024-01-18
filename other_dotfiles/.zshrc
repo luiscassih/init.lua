@@ -1,3 +1,6 @@
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
 alias v=nvim
 alias t=tmux
 alias so="source .zshrc"

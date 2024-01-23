@@ -5,8 +5,9 @@ return {
     null_ls.setup({
       sources = {
         null_ls.builtins.diagnostics.gdlint,
-        null_ls.builtins.diagnostics.eslint_d,
+        -- null_ls.builtins.diagnostics.eslint_d,
         null_ls.builtins.formatting.gdformat,
+        null_ls.builtins.formatting.jq,
       }
     })
   end

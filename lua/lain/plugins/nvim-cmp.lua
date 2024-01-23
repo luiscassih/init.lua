@@ -10,6 +10,7 @@ return {
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
+    require("luasnip.loaders.from_vscode").lazy_load { paths = { "~/.config/nvim/snippets" } }
     cmp.setup({
       window = {
         completion = cmp.config.window.bordered({}),
@@ -27,6 +28,14 @@ return {
         ["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
         ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
         -- ["<tab>"] = cmp.mapping.select_next_item(), -- next suggestion
+        ["<C-o>"] = cmp.mapping(function(fallback)
+          if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end
+        ),
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions

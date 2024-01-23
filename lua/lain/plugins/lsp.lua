@@ -3,8 +3,10 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     { 'hrsh7th/cmp-nvim-lsp' },
+    "folke/neodev.nvim",
   },
   config = function()
+    require("neodev").setup({})
     local lspconfig = require("lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -39,7 +41,7 @@ return {
 
     lspconfig.dartls.setup(default_opts)
     lspconfig.gdscript.setup(default_opts)
-    lspconfig.eslint.setup(default_opts)
+    -- lspconfig.eslint.setup(default_opts)
     lspconfig.csharp_ls.setup {
       capabilities = capabilities,
       on_attach = on_attach,
@@ -68,6 +70,9 @@ return {
           diagnostics = {
             globals = { "vim" },
           },
+          completion = {
+            callSnippet = "Replace"
+          }
         }
       }
     }

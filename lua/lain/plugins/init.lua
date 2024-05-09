@@ -82,6 +82,8 @@ return {
           ['gg'] = "actions.open_cwd",
           ['cd'] = "actions.tcd",
           ['gh'] = "actions.toggle_hidden",
+          ['gs'] = "actions.select_vsplit",
+          ['gS'] = "actions.select_split",
         },
       })
     end

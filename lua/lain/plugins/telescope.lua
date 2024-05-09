@@ -17,6 +17,7 @@ return {
     vim.keymap.set('n', '<leader>pd', builtin.diagnostics, {})
     vim.keymap.set('n', '<leader>pc', builtin.commands, {})
     vim.keymap.set('n', '<leader>pt', builtin.filetypes, {})
+    vim.keymap.set('n', '<leader>pp', builtin.registers, {})
     -- vim.keymap.set('n', '<C-p>', builtin.git_files, {})
     vim.keymap.set('n', '<leader>pG', function()
       builtin.grep_string({ search = vim.fn.input('Grep > ') });

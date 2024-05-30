@@ -76,5 +76,9 @@ return {
         }
       }
     }
+    lspconfig.ruff_lsp.setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
   end
 }

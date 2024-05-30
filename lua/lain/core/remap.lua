@@ -57,12 +57,12 @@ vim.keymap.set("n", "<C-p>", function()
 end)
 --]]
 -- vim.keymap.del("n", "<leader>f")
-vim.keymap.set("n", "<leader>lf", function()
-    local cmd = "lfp " .. vim.fn.expand('%:p')
-    local window_id = vim.fn.systemlist("tmux display-message -p \\#I")[1]
-    local command = 'tmux display-popup -d "#{pane_current_path}" -w 100\\% -h 100\\% -E "' .. cmd  .. ' | xargs -I {} tmux send-keys -t ' .. window_id .. ' \\":edit {}\\" Enter"'
-    os.execute(command)
-end)
+-- vim.keymap.set("n", "<leader>lf", function()
+--     local cmd = "lfp " .. vim.fn.expand('%:p')
+--     local window_id = vim.fn.systemlist("tmux display-message -p \\#I")[1]
+--     local command = 'tmux display-popup -d "#{pane_current_path}" -w 100\\% -h 100\\% -E "' .. cmd  .. ' | xargs -I {} tmux send-keys -t ' .. window_id .. ' \\":edit {}\\" Enter"'
+--     os.execute(command)
+-- end)
 
 -- vim.keymap.set("n", "<C-s>", '<cmd>silent !tmux display-popup -E "tmux ls | fzf | awk \'{sub(/:.*/, \\"\\"); print $1}\' | xargs tmux switch -t"<CR>');
 
@@ -137,7 +137,7 @@ vim.keymap.set('n', '<C-t>', function ()
   vim.cmd("MaximizerToggle")
 end)
 
-vim.keymap.set('n', '<leader>nt', ':Neotree<cr>')
+vim.keymap.set('n', '<leader>lf', ':Neotree<cr>')
 vim.keymap.set('n', '<leader>o', ':Oil<cr>')
 vim.keymap.set('n', '>>', '<C-w>10>', { noremap = true })
 vim.keymap.set('n', '<<', '<C-w>10<', { noremap = true })

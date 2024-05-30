@@ -8,7 +8,8 @@ return {
   --   }
   },
   config = function()
-    vim.keymap.set("n", "<C-p>", ":Files<CR>", { noremap = true })
+    vim.keymap.set("n", "<C-p>", ":GFiles<CR>", { noremap = true })
+    vim.keymap.set("n", "<leader>ls", ":Files<CR>", { noremap = true })
     vim.keymap.set("n", "<C-b>", ":Buffers<CR>", { noremap = true })
     vim.keymap.set("n", "<C-f>", ":Rg<CR>", { noremap = true })
     vim.env.FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git"'

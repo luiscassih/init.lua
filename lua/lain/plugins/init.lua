@@ -73,11 +73,13 @@ return {
     'stevearc/oil.nvim',
     config = function()
       require('oil').setup({
+        delete_to_trash = true,
         default_file_explorer = true,
         use_default_keymaps = false,
+        skip_confirm_for_simple_edits = true,
         keymaps = {
           ['gd'] = "actions.select",
-          ['g?'] = "actions.show.help",
+          ['g?'] = "actions.show_help",
           ['go'] = "actions.parent",
           ['gg'] = "actions.open_cwd",
           ['cd'] = "actions.tcd",

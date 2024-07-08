@@ -27,11 +27,16 @@ vim.keymap.set("t", "L", "$")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("n", "<leader>P", [["+p]])
 
--- prevent x and d to rewrite yanked register
-vim.keymap.set("n", "x", [["_x]])
-vim.keymap.set({ "n", "v" }, "d", [["_d]])
+-- prevent x to rewrite yanked register
+vim.keymap.set({ "n", "v" }, "x", [["_x]])
+
+-- uncomment this to have d the same as x
+-- vim.keymap.set({ "n", "v" }, "d", [["_d]])
 -- vim.keymap.set({ "n", "v" }, "c", [["_c]])
-vim.keymap.set({ "n", "v" }, "<leader>d", [["0d]])
+-- vim.keymap.set({ "n", "v" }, "<leader>d", [["0d]])
+
+-- have leader d to do the same as x
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set({ "n", "v" }, "H", "^")
 vim.keymap.set({ "n", "v" }, "L", "$")

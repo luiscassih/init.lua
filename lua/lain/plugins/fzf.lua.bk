@@ -2,10 +2,10 @@ return {
   -- 'vijaymarupudi/nvim-fzf'
   'junegunn/fzf.vim',
   dependencies = {
-  --   {
+    -- {
       'junegunn/fzf',
-  --     dir = "~/.fzf", build = "./install --all",
-  --   }
+    --   dir = "~/.fzf", build = "./install --all",
+    -- }
   },
   config = function()
     vim.keymap.set("n", "<C-p>", ":GFiles<CR>", { noremap = true })

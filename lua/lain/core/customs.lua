@@ -232,3 +232,18 @@ function VisualToText()
   local selected_characters = string.sub(lines[1], start_col, end_col)
   return selected_characters
 end
+
+function FZFRegisters()
+  local fzf = require('fzf')
+  local reg = vim.fn.getregtype(vim.v.register)
+  local res = fzf.fzf({vim.fn.getreg(vim.v.register)}, "--ansi")
+end
+
+function WriterMode()
+  vim.opt.linebreak = false
+  vim.opt.wrap = true
+  vim.opt.foldcolumn = "9"
+  vim.opt.ruler = false
+  vim.opt.relativenumber = false
+  vim.opt.number = false
+end

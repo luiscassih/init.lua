@@ -20,8 +20,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("t", "<C-c>", "<C-\\><C-n>")
 vim.keymap.set("t", "<C-c><C-c>", "<C-c>")
 
-vim.keymap.set("t", "H", "^")
-vim.keymap.set("t", "L", "$")
+-- vim.keymap.set("t", "H", "^")
+-- vim.keymap.set("t", "L", "$")
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -38,8 +38,8 @@ vim.keymap.set({ "n", "v" }, "x", [["_x]])
 -- have leader d to do the same as x
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
-vim.keymap.set({ "n", "v" }, "H", "^")
-vim.keymap.set({ "n", "v" }, "L", "$")
+-- vim.keymap.set({ "n", "v" }, "H", "^")
+-- vim.keymap.set({ "n", "v" }, "L", "$")
 -- next greatest remap ever : asbjornHaland
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+ygv]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])

@@ -1,0 +1,2 @@
+#!/bin/bash
+guake -n test_guake -e "bash -c 'fzf .; read -p "Press enter to exit..."'"

@@ -2,9 +2,10 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   config = function()
-    require 'nvim-treesitter.configs'.setup {
+    local ts = require('nvim-treesitter.configs')
+    ts.setup({
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
-      ensure_installed = { "typescript", "javascript", "rust", "lua", "vim", "vimdoc", "query", "http", "json", "gdscript" },
+      ensure_installed = { "typescript", "javascript", "rust", "lua", "vim", "vimdoc", "query", "http", "json", "gdscript", "markdown_inline" },
 
       -- Install parsers synchronously (only applied to `ensure_installed`)
       sync_install = false,
@@ -22,6 +23,34 @@ return {
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
       },
-    }
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "s",
+          node_incremental = "s",
+          scope_incremental = false,
+          node_decremental = "S",
+        },
+      },
+      textobjects = {
+        enable = true,
+        select = {
+          enable = true,
+          keymaps = {
+            ['w'] = { query = '@word.inner', desc = "Word" },
+          },
+        },
+      }
+    })
+
+    -- local incremental_selection = require("nvim-treesitter.incremental_selection")
+    -- vim.keymap.set({'n', 'v'}, 'w', incremental_selection.init_selection)
+    -- vim.keymap.set({'n', 'v'}, 'w', function ()
+    --   vim.cmd("w")
+    --   incremental_selection.init_selection()
+    -- end)
+    -- vim.keymap.set({'n', 'v'}, 's', incremental_selection.node_incremental)
+    -- vim.keymap.set({'x'}, 'S', incremental_selection.node_decremental)
+
   end
 }

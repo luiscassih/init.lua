@@ -12,6 +12,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 vim.opt.wrap = false
+vim.opt.ignorecase = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false

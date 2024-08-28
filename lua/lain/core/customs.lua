@@ -247,3 +247,18 @@ function WriterMode()
   vim.opt.relativenumber = false
   vim.opt.number = false
 end
+
+function OpenGodot()
+  -- open godot on the folder where nvim was open first
+  -- vim.fn.jobstart({"godot", vim.fn.getcwd()})
+  vim.cmd("w")
+  vim.cmd("!godot")
+end
+
+function SaveSessionAndExit()
+  vim.cmd('mksession! .vimsession')
+  vim.cmd('qa!')
+end
+
+vim.api.nvim_command("cnoreabbrev qs lua SaveSessionAndExit()<cr>")
+vim.api.nvim_command("cnoreabbrev mks mksession! .vimsession<cr>")

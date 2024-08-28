@@ -1,0 +1,132 @@
+{
+	"layer": "top",	
+	"position": "top",
+    "height": 27,
+
+    "modules-left": ["hyprland/workspaces", "custom/scratch", "hyprland/mode", "hyprland/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray","memory", "pulseaudio", "battery",  
+	"custom/lock",
+	"custom/power"
+],
+
+	"hyprland/workspaces": {
+        "disable-scroll": true,
+        "disable-markup": true,
+        "format": "{name}:{windows}",
+	"window-rewrite-default": " ",
+	"window-rewrite": {
+		"title<.*youtube.*>": " ",
+		"title<.*amazon.*>": " ",
+		"title<.*reddit.*>": " ",
+		"title<.*Picture-in-Picture.*>": " ",
+		"class<firefox|brave|chromium>": " ",
+		"class<kitty>": " ",
+		"class<konsole>": " ",
+		"class<thunar>": "󰝰 ",
+		"class<discord>": " ",
+		"class<subl>": "󰅳 ",
+		"class<celluloid>": " ",
+		"class<Cider>": "󰎆 ",
+		"class<code-oss>": "󰨞 ",
+		"class<codium|codium-url-handler|VSCodium>": "󰨞 ",
+		"class<codeblocks>": "󰅩 ",
+		"class<mousepad>": " ",
+		"class<libreoffice-writer>": " ",
+		"class<libreoffice-startcenter>": "󰏆 "
+		}   
+    },
+
+	"hyprland/window": {
+    	"format": "{}",
+    	"max-length": 150
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 15
+    },
+
+    "clock": {
+        "format": "{: %a %b%e   %R}",
+        "interval": 30
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": " {used:0.1f}G/{total:0.1f}G "
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "states": {
+              "full": 99,
+              "good": 98,
+              "normal": 98,
+              "warning": 20,
+              "critical": 20
+        },
+        "format":      "{icon} {capacity}%",
+        "format-good": "{icon} {capacity}%", 
+        "format-full":      " {capacity}%",
+        "format-charging":  "󰂄 {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "interval": 30
+    },
+
+    "network": {
+        "interface": "wlp0s20f3", 
+        "format-wifi": "  {essid} ",
+        "format-disconnected": " ",
+        "interval": 60
+    },
+
+    "pulseaudio": {
+        "format": " {icon} {volume}%",
+        "format-bluetooth": "  {volume}%  ",
+        "format-muted":"婢  Mute  ",
+        "interval": 60,
+
+        "format-icons": {
+            "default": [""]
+        },
+            
+       "on-click": "blueman-manager"    
+    },
+    "custom/lock": {
+      "format": "󰌾",
+      "on-click": "~/.config/hypr/scripts/LockScreen.sh",
+      "tooltip": true,
+      "tooltip-format": "󰷛 Screen Lock",
+
+    },
+    "custom/power": {
+      "format": "⏻ ",
+      "on-click": "~/.config/hypr/scripts/Wlogout.sh",
+      "on-click-right": "~/.config/hypr/scripts/ChangeBlur.sh",
+      "tooltip": true,
+      "tooltip-format": "Left Click: Logout Menu\nRight Click: Change Blur",
+    },
+
+    "clock": {
+      "interval": 1,
+        //"format": " {:%I:%M %p}", // AM PM format
+        //"format": " {:%H:%M:%S}", // 24H
+      "format": " {:%H:%M:%S   %Y, %d %B, %A}",
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "calendar": {
+        "mode": "year",
+        "mode-mon-col": 3,
+        "weeks-pos": "right",
+        "on-scroll": 1,
+        "format": {
+          "months": "<span color='#ffead3'><b>{}</b></span>",
+          "days": "<span color='#ecc6d9'><b>{}</b></span>",
+          "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+          "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+          "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+        }
+      }
+    }
+}

@@ -6,7 +6,7 @@ return {
 	},
   config = function()
     local scissors = require("scissors")
-    vim.keymap.set("n", "<leader>se", function() scissors.editSnippet() end)
-    vim.keymap.set({ "n", "x" }, "<leader>sa", function() scissors.addNewSnippet() end)
+    vim.keymap.set("n", "<leader>ke", function() scissors.editSnippet() end)
+    vim.keymap.set({ "n", "x" }, "<leader>ka", function() scissors.addNewSnippet() end)
   end
 }

@@ -58,3 +58,7 @@ aur/jdk17-temurin
 sudo archlinux-java set java-17-temurin
 
 
+
+grimblast
+# bind = $mainMod SHIFT, S, exec, grimblast --freeze copysave area ~/Pictures/$(date +%Y-%m-%d_%H-%m-%s).png
+bind = $mainMod SHIFT, S, exec, grimblast --freeze save area - | swappy -f -

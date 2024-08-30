@@ -75,14 +75,14 @@ end)
 -- vim.keymap.set("n", "<C-s>", '<cmd>silent !tmux display-popup -w 100\\% -h 40\\% -E "ts"<CR>');
 vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format)
 
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- My own solution to Ctrl-D implementation of substitution, it uses the x register to store the word
-vim.keymap.set("n", "<leader>s", [[:let @x = "<C-r><C-w>"<Enter>V]])
+-- vim.keymap.set("n", "<leader>s", [[:let @x = "<C-r><C-w>"<Enter>V]])
 -- s will replace the coincidence, even if it's part of another word
-vim.keymap.set("v", "<leader>s", [[:s/<C-r>x//g<Left><Left>]])
+-- vim.keymap.set("v", "<leader>s", [[:s/<C-r>x//g<Left><Left>]])
 -- S will replace only words, ideal for refactor a variable only in that visual block
-vim.keymap.set("v", "<leader>S", [[:s/\<<C-r>x\>//g<Left><Left>]])
+-- vim.keymap.set("v", "<leader>S", [[:s/\<<C-r>x\>//g<Left><Left>]])
 
 -- this is the same but it will overwrite the default yanked register
 -- vim.keymap.set("n", "<leader>s", [[yiwV]])

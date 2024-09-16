@@ -73,7 +73,6 @@ end)
 
 -- removed, using binding directly in tmux conf
 -- vim.keymap.set("n", "<C-s>", '<cmd>silent !tmux display-popup -w 100\\% -h 40\\% -E "ts"<CR>');
-vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format)
 
 -- vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
@@ -142,7 +141,7 @@ vim.keymap.set('n', '<C-t>', function ()
   vim.cmd("MaximizerToggle")
 end)
 
-vim.keymap.set('n', '<leader>lf', ':Neotree<cr>')
+-- vim.keymap.set('n', '<leader>lf', ':Neotree<cr>')
 vim.keymap.set('n', '<leader>o', ':Oil<cr>')
 vim.keymap.set('n', '>>', '<C-w>10>', { noremap = true })
 vim.keymap.set('n', '<<', '<C-w>10<', { noremap = true })
@@ -169,3 +168,5 @@ vim.keymap.set('n', 'k', [[v:count? 'k' : 'gk']], { noremap = true, expr = true 
 
 -- cd to current file
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<cr>:pwd<cr>')
+
+vim.keymap.set({'n', 'v'}, '<c-a>', '<esc>[[ggVG]]')

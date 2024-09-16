@@ -41,3 +41,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end
 })
+
+-- global statusline
+vim.opt.laststatus=3

@@ -11,7 +11,7 @@ return {
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
     local on_attach = function(client, bufnr)
-      local opts = { buffer = bufnr, remap = false }
+        local opts = { buffer = bufnr, remap = false }
 
       vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
       vim.keymap.set("n", "gs", function() vim.cmd("vsplit"); vim.lsp.buf.definition() end, opts)
@@ -25,6 +25,7 @@ return {
       vim.keymap.set("n", "<leader>lR", function() vim.lsp.buf.rename() end, opts)
       vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
       vim.keymap.set("n", "<leader>R", ":LspRestart<CR>", opts)
+      vim.keymap.set({"n", "v"}, "<leader>f", vim.lsp.buf.format)
     end
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
@@ -77,13 +78,15 @@ return {
         }
       }
     }
-    lspconfig.ruff_lsp.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }
-    lspconfig.tailwindcss.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }
+
+    local with_default = {"ruff_lsp", "tailwindcss", "golangci_lint_ls", "gopls"}
+
+    for _, lsp in ipairs(with_default) do
+      lspconfig[lsp].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+    end
+    vim.lsp.log.set_level(vim.log.levels.ERROR)
   end
 }

@@ -3,6 +3,7 @@ return {
   -- 'EdenEast/nightfox.nvim',
   'catppuccin/nvim',
   name = "catppuccin",
+  enabled = true,
   config = function()
     -- vim.opt.background = "dark"
     -- vim.cmd.colorscheme("oxocarbon")
@@ -13,9 +14,15 @@ return {
     --
     -- catppuccin override
     require("catppuccin").setup({
+      styles = {
+        comments = { "italic" },
+        conditionals = { "italic" },
+      },
       highlight_overrides = {
         all = function(colors)
           return {
+            -- Comment = { style = { "italic" } },
+            ["@TODOComment"] = { fg = colors.red },
             CurSearch = { bg = colors.sky },
             IncSearch = { bg = colors.sky },
             CursorLineNr = { fg = colors.blue, style = { "bold" } },

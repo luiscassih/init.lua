@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>h", '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>')
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -155,11 +155,17 @@ vim.keymap.set('v', 'y', 'ygv', { noremap = true })
 vim.keymap.set('n', '<leader>vh', [[:h <C-r><C-w><Enter>]], { noremap = true })
 
 vim.keymap.set('n', '<leader>q', function ()
-  if vim.api.nvim_buf_get_option(0, "buftype") == "quickfix" then
+  if vim.bo[0].buftype == "quickfix" then
+  -- if vim.api.nvim_buf_get_option(0, "buftype") == "quickfix" then
     vim.cmd("cclose")
   else
     vim.cmd("copen")
   end
+end)
+
+-- add this file location to the end of quickfix list
+vim.keymap.set('n', '<leader>a', function ()
+  AddQFItem(vim.fn.expand("%:p"))
 end)
 
 -- Let's make it easier to move in wrapped lines
@@ -170,3 +176,5 @@ vim.keymap.set('n', 'k', [[v:count? 'k' : 'gk']], { noremap = true, expr = true 
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<cr>:pwd<cr>')
 
 vim.keymap.set({'n', 'v'}, '<c-a>', '<esc>[[ggVG]]')
+
+vim.keymap.set('i', '<S-tab>', '<c-d>')

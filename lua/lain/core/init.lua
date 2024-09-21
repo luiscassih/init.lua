@@ -1,4 +1,6 @@
-require("lain.core.customs")
+require("lain.customs.others")
+require("lain.customs.treesitter")
 require("lain.core.remap")
 require("lain.core.set")
 require("lain.core.runners")
+-- require("lain.core.galaxy").shine()

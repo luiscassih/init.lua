@@ -133,6 +133,15 @@ function RemoveQFItem(mode)
   vim.api.nvim_win_set_cursor(winid, {new_idx, 0})
 end
 
+function AddQFItem(path)
+  vim.fn.setqflist({
+    {
+      bufnr = vim.fn.bufnr(path),
+      text = path
+    }
+  }, 'a')
+end
+
 
 function CreateFloatWindow(opts)
   local relative = opts.relative or 'editor'
@@ -306,3 +315,4 @@ vim.keymap.set('x', 'aq', function() quote_motion('a') end, {silent = true, desc
 -- Normal mode mappings to initiate visual selection
 vim.keymap.set('n', 'viq', function() quote_motion('vi') end, {silent = true, desc = "Select inside closest quote"})
 vim.keymap.set('n', 'vaq', function() quote_motion('va') end, {silent = true, desc = "Select around closest quote"})
+

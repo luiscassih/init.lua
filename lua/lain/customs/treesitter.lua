@@ -14,18 +14,27 @@ query.add_directive("substr!", function(match, _, _, pred, metadata)
     end
 
     local range = metadata[capture_id].range or { node:range() }
-    local start_col = pred[3] + 0
-    local end_col = pred[4] + 0
+    local start_col = pred[3] + range[2]
+    -- if receives -1, then use the end of the range
+    -- if not, then count from the start of the first parameter
+    local end_col = (pred[4]+0) == -1 and range[4] or pred[4] + start_col
+    if start_col > range[4] then
+      start_col = range[4]
+    end
+    if end_col > range[4] then
+      end_col = range[4]
+    end
+    -- print (start_col, end_col, range[2], range[4])
 
     -- cast to number
-    if start_col >= 0 and end_col <= range[4] then
+    -- if start_col >= 0 and end_col <= range[4] then
       metadata[capture_id].range = {
         range[1],
         start_col,
         range[3],
         end_col
       }
-    end
+    -- end
 end, { force = true, all = true }) -- ERA ESTA MIERDA DE ALL
 
 query.add_directive("find_set_range!", function(match, _, _, pred, metadata)

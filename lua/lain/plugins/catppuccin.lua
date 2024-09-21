@@ -15,8 +15,8 @@ return {
     -- catppuccin override
     require("catppuccin").setup({
       styles = {
-        comments = { "italic" },
-        conditionals = { "italic" },
+        -- comments = { "italic" },
+        -- conditionals = { "italic" },
       },
       highlight_overrides = {
         all = function(colors)
@@ -50,7 +50,12 @@ return {
             Boolean = { fg = colors.pink, style = { "bold" } },
             TSBoolean = { fg = colors.pink, style = { "bold" } },
             -- Keyword = { fg = colors.pink, style = { "bold" } },
-            ["@keyword.return"] = { fg = colors.pink, style = { "bold" } },
+            ["@keyword.return"] = { fg = colors.red, style = { "bold" } },
+            ["@parameter"] = { fg = colors.pink, style = { "bold" } },
+            ["@tag.builtin"] = { fg = colors.blue, style = { "bold" } },
+            ["@type"] = { fg = colors.teal, style = { "bold" } },
+            ["@type.builtin"] = { fg = colors.teal, style = { "bold" } },
+            ["@tag.attribute.tsx"] = { fg = colors.lavender, style = { } },
           }
         end,
       },

@@ -1,21 +1,23 @@
 ;; extends
-; (("return"   @keyword.function) (#set! conceal "󰌑"))
-; (("return"   @keyword.function) @Boolean)
-(("function"     @keyword.function) (#set! conceal "󰊕"))
-(("export"     @keyword.export) (#set! conceal "🢦"))
-; (("const"     @keyword) (#set! conceal "✅"))
+;; COMMONS
+(("return"   @keyword.function) (#set! conceal "󰌑"))
 (("["     @punctuation.bracket) (#set! conceal "⎣"))
 (("]"     @punctuation.bracket) (#set! conceal "⎤"))
-; (("<" @punctuation.bracket) (#set! conceal "〈"))
-; ((">" @punctuation.bracket) (#set! conceal "〉"))
+(
+  (comment) @comment
+  (#contains? @comment "TODO")
+) @TODOComment ;don't forget to add this new group to for example catppuccin
+
+; (("return"   @keyword.function) @Boolean)
+;; TSX
+(("function"     @keyword.function) (#set! conceal "󰊕"))
+(("interface" @keyword) (#set! conceal "Ⅰ"))
+(("import" @keyword.import) (#set! conceal "😈"))
 (("const" @keyword) (#set! conceal "Ⅽ"))
 (("type" @keyword) (#set! conceal "Τ"))
 (("let" @keyword) (#set! conceal "Ⅼ"))
-(("interface" @keyword) (#set! conceal "Ⅰ"))
-(("import" @keyword.import) (#set! conceal "😈"))
-; (("const" @keyword) (#set! conceal "コンスト"))
-; (("const" @keyword) (#set! conceal "コンスト"))
-; (("const" @keyword) (#set! conceal "コンスト"))
+(("export"     @keyword.export) (#set! conceal "🢦"))
+
 ; alternative: https://github.com/luckasRanarison/tailwind-tools.nvim/blob/master/queries/tsx/class.scm
 (
   (property_identifier) @att_name
@@ -32,22 +34,18 @@
 ;   (#substr! @comment 3 6)
 ;   (#set! @comment conceal "✅")
 ; )
-(
-  (comment) @comment
-  (#contains? @comment "[x]")
-  ; this looks for the first find
-  (#find_set_range! @comment "[x]")
-  ; this sets metadata.conceal for this node
-  ; if we want more, we need more nodes
-  (#set! @comment conceal "☑")
-)
-(
-  (comment) @comment
-  (#contains? @comment "[ ]")
-  (#find_set_range! @comment "[ ]")
-  (#set! @comment conceal "☐")
-)
-(
-  (comment) @comment
-  (#contains? @comment "TODO")
-) @TODOComment ;don't forget to add this new group to for example catppuccin
+; (
+;   (comment) @comment
+;   (#contains? @comment "[x]")
+;   ; this looks for the first find
+;   (#find_set_range! @comment "[x]")
+;   ; this sets metadata.conceal for this node
+;   ; if we want more, we need more nodes
+;   (#set! @comment conceal "☑")
+; )
+; (
+;   (comment) @comment
+;   (#contains? @comment "[ ]")
+;   (#find_set_range! @comment "[ ]")
+;   (#set! @comment conceal "☐")
+; )

@@ -16,6 +16,11 @@ return {
         'tsserver',
         'rust_analyzer',
         'lua_ls',
+        'clangd',
+        'gopls',
+        'golangci_lint_ls',
+        'tailwindcss',
+        'tsserver'
       },
     })
   end

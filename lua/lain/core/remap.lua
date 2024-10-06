@@ -114,32 +114,32 @@ vim.api.nvim_command("autocmd FileType gdscript setlocal tabstop=4 shiftwidth=4 
 
 -- vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux display-popup -d "\\#{pane_current_path}"<cr>')
 -- maximize a terminal buffer, open if not exists
-vim.keymap.set('n', '<C-t>', function ()
-  local bufnr = GetTermBuffer()
-  if bufnr ~= nil then
-    local winid = vim.fn.bufwinid(bufnr)
-    if winid ~= -1 then
-      -- terminal buffer window exist, so focus
-      vim.api.nvim_set_current_win(winid)
-    else
-      -- If the terminal buffer exists but is not currently open in any window,
-      -- open it in a new split
-      vim.cmd('wincmd l') -- make sure we are at right window
-      vim.cmd("split")
-      vim.cmd('wincmd j')
-      vim.api.nvim_set_current_buf(bufnr)
-    end
-    -- after focusing of a terminal, maximize it
-    vim.cmd("MaximizerToggle")
-    return
-  end
-  -- there's no terminal, so open it
-  vim.cmd('wincmd l')
-  vim.cmd("split")
-  vim.cmd('wincmd j')
-  vim.cmd("term")
-  vim.cmd("MaximizerToggle")
-end)
+-- vim.keymap.set('n', '<C-t>', function ()
+--   local bufnr = GetTermBuffer()
+--   if bufnr ~= nil then
+--     local winid = vim.fn.bufwinid(bufnr)
+--     if winid ~= -1 then
+--       -- terminal buffer window exist, so focus
+--       vim.api.nvim_set_current_win(winid)
+--     else
+--       -- If the terminal buffer exists but is not currently open in any window,
+--       -- open it in a new split
+--       vim.cmd('wincmd l') -- make sure we are at right window
+--       vim.cmd("split")
+--       vim.cmd('wincmd j')
+--       vim.api.nvim_set_current_buf(bufnr)
+--     end
+--     -- after focusing of a terminal, maximize it
+--     vim.cmd("MaximizerToggle")
+--     return
+--   end
+--   -- there's no terminal, so open it
+--   vim.cmd('wincmd l')
+--   vim.cmd("split")
+--   vim.cmd('wincmd j')
+--   vim.cmd("term")
+--   vim.cmd("MaximizerToggle")
+-- end)
 
 -- vim.keymap.set('n', '<leader>lf', ':Neotree<cr>')
 vim.keymap.set('n', '<leader>o', ':Oil<cr>')

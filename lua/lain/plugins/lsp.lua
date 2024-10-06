@@ -36,13 +36,13 @@ return {
     end
 
     -- Servers
-    local default_opts = {
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }
+    -- local default_opts = {
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- }
 
-    lspconfig.dartls.setup(default_opts)
-    lspconfig.gdscript.setup(default_opts)
+    -- lspconfig.dartls.setup(default_opts)
+    -- lspconfig.gdscript.setup(default_opts)
     -- lspconfig.eslint.setup(default_opts)
     lspconfig.csharp_ls.setup {
       capabilities = capabilities,
@@ -79,7 +79,7 @@ return {
       }
     }
 
-    local with_default = {"ruff_lsp", "tailwindcss", "golangci_lint_ls", "gopls"}
+    local with_default = {"ruff_lsp", "tailwindcss", "golangci_lint_ls", "gopls", "clangd"}
 
     for _, lsp in ipairs(with_default) do
       lspconfig[lsp].setup {

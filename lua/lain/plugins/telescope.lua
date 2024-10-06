@@ -20,7 +20,7 @@ return {
     vim.keymap.set('n', '<leader>pt', builtin.filetypes, {})
     vim.keymap.set('n', '<leader>pp', builtin.registers, {})
     vim.keymap.set('n', '<leader>lf', ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {})
-    vim.keymap.set('n', '<leader>pm', ":Telescope harpoon marks<CR>", {})
+    -- vim.keymap.set('n', '<leader>pm', ":Telescope harpoon marks<CR>", {})
     -- vim.keymap.set('n', '<C-p>', builtin.git_files, {})
     vim.keymap.set('n', '<leader>pG', function()
       builtin.grep_string({ search = vim.fn.input('Grep > ') });
@@ -62,7 +62,7 @@ return {
     })
 
     telescope.load_extension "file_browser"
-    telescope.load_extension "harpoon"
+    -- telescope.load_extension "harpoon"
 
     -- local telescope = require('telescope').load_extension("file_browser")
     -- vim.keymap.set('n', '<leader>lf', telescope.file_browser({ path = vim.fn.expand("%:p:h"), select_buffer=true }), { noremap = true })

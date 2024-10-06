@@ -31,6 +31,8 @@ return
         -- add a cursor and jump to the next word under cursor
         vim.keymap.set({"n", "v"}, "<leader>s", function() mc.addCursor("*") end)
         -- vim.keymap.set({"n", "v", "x"}, "<leader>s", function() vim.cmd.norm("*") end)
+        -- -- Split visual selections by regex.
+        vim.keymap.set("v", ",", mc.splitCursors)
 
         -- jump to the next word under cursor but do not add a cursor
         -- vim.keymap.set("n", "<c-s>", function() mc.skipCursor("*") end)

@@ -1,15 +1,22 @@
 ; relevant
 ; https://github.com/ray-x/nvim/tree/master/after/queries/go
 ;; extends
-;; Keywords
-(("return"   @keyword) (#set! conceal "󰌑"))
-; (("var"      @keyword) (#set! conceal  "ν"))
-;; (("if"       @keyword) (#set! conceal "? "))
-;; (("else"     @keyword) (#set! conceal "! "))
+;; COMMONS
+(("return"   @keyword.function) (#set! conceal "󰌑"))
+(("["     @punctuation.bracket) (#set! conceal "⎣"))
+(("]"     @punctuation.bracket) (#set! conceal "⎤"))
+(
+  (comment) @comment
+  (#contains? @comment "TODO")
+) @TODOComment ;don't forget to add this new group to for example catppuccin
+
+
+;; GO
+(("var"      @keyword) (#set! conceal  "ν"))
 (("func"     @keyword) (#set! conceal "󰊕"))
 ; (("for"      @keyword) (#set! conceal ""))
 (("break"    @keyword.return) (#set! conceal  "󱞣"))
-; (("import"   @keyword) (#set! conceal  "󰶮"))
+(("import" @keyword) (#set! conceal "😈"))
 (("package"  @keyword) (#set! conceal  ""))
 ; (("continue" @keyword) (#set! conceal "↙"))
 

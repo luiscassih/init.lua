@@ -3,7 +3,7 @@ return {
   -- 'EdenEast/nightfox.nvim',
   'catppuccin/nvim',
   name = "catppuccin",
-  enabled = true,
+  enabled = false,
   config = function()
     -- vim.opt.background = "dark"
     -- vim.cmd.colorscheme("oxocarbon")

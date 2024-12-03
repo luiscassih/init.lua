@@ -45,3 +45,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- global statusline
 vim.opt.laststatus=3
+
+-- listtchars
+vim.opt.list = true
+-- vim.opt.listchars:append("lead:⋅")
+-- vim.opt.listchars:append("eol:󰌑")
+vim.opt.listchars:append("tab:▸ ")
+vim.opt.listchars:append("trail:⋅")

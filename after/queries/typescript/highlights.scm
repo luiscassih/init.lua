@@ -1,8 +1,8 @@
 ;; extends
 ;; COMMONS
 (("return"   @keyword.function) (#set! conceal "󰌑"))
-(("["     @punctuation.bracket) (#set! conceal "⎣"))
-(("]"     @punctuation.bracket) (#set! conceal "⎤"))
+; (("["     @punctuation.bracket) (#set! conceal "⎣"))
+; (("]"     @punctuation.bracket) (#set! conceal "⎤"))
 (
   (comment) @comment
   (#contains? @comment "TODO")
@@ -10,13 +10,13 @@
 
 ; (("return"   @keyword.function) @Boolean)
 ;; TSX
-(("function"     @keyword.function) (#set! conceal "󰊕"))
-(("interface" @keyword) (#set! conceal "Ⅰ"))
-(("import" @keyword.import) (#set! conceal "😈"))
-(("const" @keyword) (#set! conceal "Ⅽ"))
-(("type" @keyword) (#set! conceal "Τ"))
-(("let" @keyword) (#set! conceal "Ⅼ"))
-(("export"     @keyword.export) (#set! conceal "🢦"))
+; (("function"     @keyword.function) (#set! conceal "󰊕"))
+; (("interface" @keyword) (#set! conceal "Ⅰ"))
+; (("import" @keyword.import) (#set! conceal "😈"))
+; (("const" @keyword) (#set! conceal "Ⅽ"))
+; (("type" @keyword) (#set! conceal "Τ"))
+; (("let" @keyword) (#set! conceal "Ⅼ"))
+; (("export"     @keyword.export) (#set! conceal "🢦"))
 
 ; alternative: https://github.com/luckasRanarison/tailwind-tools.nvim/blob/master/queries/tsx/class.scm
 (

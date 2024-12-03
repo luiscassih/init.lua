@@ -3,10 +3,12 @@ return {
   dependencies = {
       "nvimtools/none-ls-extras.nvim",
   },
+  -- disable for markdown
   config = function()
     local null_ls = require("null-ls")
     -- local none_ls = require("none-ls")
     null_ls.setup({
+      -- disable for markdown
       sources = {
         null_ls.builtins.diagnostics.gdlint,
         require("none-ls.diagnostics.eslint_d").with({
@@ -111,7 +113,8 @@ return {
     null_ls.register({
       name = "split-parameters",
       method = null_ls.methods.CODE_ACTION,
-      filetypes = { "_all" },
+      -- filetypes = { "_all" },
+      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "lua" },
       generator = {
         fn = function()
           return {

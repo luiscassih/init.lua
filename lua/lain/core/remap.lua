@@ -142,7 +142,6 @@ vim.api.nvim_command("autocmd FileType gdscript setlocal tabstop=4 shiftwidth=4 
 -- end)
 
 -- vim.keymap.set('n', '<leader>lf', ':Neotree<cr>')
-vim.keymap.set('n', '<leader>o', ':Oil<cr>')
 vim.keymap.set('n', '>>', '<C-w>10>', { noremap = true })
 vim.keymap.set('n', '<<', '<C-w>10<', { noremap = true })
 vim.keymap.set('n', '<C-w>,', '<C-w>5+', { noremap = true })

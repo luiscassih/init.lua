@@ -1,16 +1,14 @@
 return {
   "monkoose/neocodeium",
   event = "VeryLazy",
+  enabled = true,
   config = function()
     local neocodeium = require("neocodeium")
-    local skip_filetypes = { 'markdown' }
     neocodeium.setup({
-      filter = function(bufnr)
-        if vim.tbl_contains(skip_filetypes, vim.api.nvim_get_option_value("filetype", { buf = bufnr })) then
-          return false
-        end
-        return true
-      end
+      filetypes = {
+        markdown = false,
+        DressingInput = false,
+      },
     })
     vim.keymap.set("i", "<c-l>", neocodeium.accept)
     vim.keymap.set("i", "<c-x>", neocodeium.clear)

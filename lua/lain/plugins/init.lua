@@ -69,27 +69,6 @@ return {
     end
   },
 
-  {
-    'stevearc/oil.nvim',
-    config = function()
-      require('oil').setup({
-        delete_to_trash = true,
-        default_file_explorer = true,
-        use_default_keymaps = false,
-        skip_confirm_for_simple_edits = true,
-        keymaps = {
-          ['gd'] = "actions.select",
-          ['g?'] = "actions.show_help",
-          ['go'] = "actions.parent",
-          ['gg'] = "actions.open_cwd",
-          ['cd'] = "actions.tcd",
-          ['gh'] = "actions.toggle_hidden",
-          ['gs'] = "actions.select_vsplit",
-          ['gS'] = "actions.select_split",
-        },
-      })
-    end
-  },
 
   {
     "nvim-telescope/telescope-file-browser.nvim",

@@ -1,6 +1,7 @@
 return {
   'MeanderingProgrammer/markdown.nvim',
   main = "render-markdown",
+  enabled = false,
   -- event = "BufRead *.md",
   ft = "markdown",
   opts = {},

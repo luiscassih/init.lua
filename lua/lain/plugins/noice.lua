@@ -10,6 +10,11 @@ return {
       cmdline = {
         view = "cmdline",
       },
+      lsp = {
+        signature = {
+          auto_open = { enabled = false },
+        },
+      }
       -- routes = {
       --   {
       --     view = "notify",

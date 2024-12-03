@@ -1,6 +1,6 @@
 return {
   "olimorris/codecompanion.nvim",
-  enabled = true,
+  enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
@@ -55,8 +55,8 @@ return {
         end,
       },
     })
-    vim.api.nvim_set_keymap("n", "<c-l>", "<cmd>CodeCompanionToggle<cr>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("v", "<c-l>", "<cmd>CodeCompanionToggle<cr>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<c-l>", "<cmd>CodeCompanionChat<cr>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("v", "<c-l>", "<cmd>CodeCompanionChat<cr>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("v", "ga", "<cmd>CodeCompanionAdd<cr>", { noremap = true, silent = true })
   end
 }

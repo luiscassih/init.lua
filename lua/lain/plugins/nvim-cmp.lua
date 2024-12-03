@@ -7,6 +7,7 @@ return {
     "L3MON4D3/LuaSnip",         -- snippet engine
     "saadparwaiz1/cmp_luasnip", -- for autocompletion
   },
+  enabled = false,
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")

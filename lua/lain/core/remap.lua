@@ -177,3 +177,9 @@ vim.keymap.set('n', '<leader>cd', ':cd %:p:h<cr>:pwd<cr>')
 vim.keymap.set({'n', 'v'}, '<c-a>', '<esc>[[ggVG]]')
 
 vim.keymap.set('i', '<S-tab>', '<c-d>')
+
+-- Remap macro recording to 'Q' instead of 'q'
+-- vim.keymap.set('n', 'q', '<nop>', {})
+vim.keymap.set('n', 'Q', 'q', { desc = 'Record macro', noremap = true })
+
+vim.keymap.set('n', '<bs>', '<C-^>')

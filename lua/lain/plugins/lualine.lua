@@ -35,6 +35,7 @@ return {
     -- Author: shadmansaleh
     -- Credit: glepnir
     local lualine = require('lualine')
+    local noice = require("noice")
 
     -- Color table for highlights
     -- stylua: ignore
@@ -100,6 +101,31 @@ return {
         lualine_c = {},
         lualine_x = {},
       },
+      tabline = {
+        lualine_a = {
+          {
+            'buffers',
+            -- component_separators = { left = '▊' },
+            -- section_separators = { left = '▊' },
+            buffers_color = {
+              active = { fg = "#437AED" },
+              -- inactive = { bg = "#11111a", fg = "#437AED" },
+            },
+            symbols = {
+              alternate_file = '',
+            },
+            filetype_names = {
+              oil = "Oil",
+            },
+          }
+        },
+        lualine_z = {
+          {
+            "filename",
+            path = 3,
+          }
+        }
+      },
     }
 
     -- Inserts a component in lualine_c at left section
@@ -155,6 +181,22 @@ return {
     }
 
     ins_left {
+      function()
+        if (require("AniKakoune").isKakouneMode()) then
+          return "◎ Kak"
+        end
+        return ""
+      end,
+      color = function ()
+        -- if (require("anikakoune").isKakouneMode()) then
+        --   return { fg = colors.red, gui = 'bold' }
+        -- end
+        -- return { fg = colors.gray, }
+        return { fg = colors.red, gui = 'bold' }
+      end,
+    }
+
+    ins_left {
       -- filesize component
       'filesize',
       cond = conditions.buffer_not_empty,
@@ -169,6 +211,12 @@ return {
     ins_left { 'location' }
 
     ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+
+    ins_left {
+      noice.api.statusline.mode.get,
+      cond = noice.api.statusline.mode.has,
+      color = { fg = colors.red },
+    }
 
     ins_left {
       'diagnostics',
@@ -253,5 +301,9 @@ return {
 
     -- Now don't forget to initialize lualine
     lualine.setup(config)
+
+    -- keymaps
+    vim.keymap.set('n', '<c-j>', ":bNext<cr>", { noremap = true })
+    vim.keymap.set('n', '<c-k>', ":bnext<cr>", { noremap = true })
   end
 }

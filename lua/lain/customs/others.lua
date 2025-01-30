@@ -316,3 +316,181 @@ vim.keymap.set('x', 'aq', function() quote_motion('a') end, {silent = true, desc
 vim.keymap.set('n', 'viq', function() quote_motion('vi') end, {silent = true, desc = "Select inside closest quote"})
 vim.keymap.set('n', 'vaq', function() quote_motion('va') end, {silent = true, desc = "Select around closest quote"})
 
+-- Find and select the closest parameter under cursor
+-- NOT WORKING
+local function find_closest_param()
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+
+    -- Get the current line up to cursor and after cursor
+    local before_cursor = line:sub(1, col + 1)
+    local after_cursor = line:sub(col + 1)
+
+    -- Detect context
+    local context = "none"
+    local before_clean = before_cursor:gsub("%s+", "") -- remove spaces for easier pattern matching
+
+    -- Check for class context (="...)
+    if before_clean:match("=[\"'][^\"']*$") then
+        context = "class"
+    -- Check for arrow function ((param: type) =>)
+    elseif before_clean:match("=>.*%(.*$") or before_clean:match("=>[^%(]*$") then
+        context = "arrow_function"
+    -- Check for regular function (word(...))
+    elseif before_clean:match("[%w_]+%(.*$") then
+        context = "function"
+    -- Check for object context ({key = value})
+    elseif before_clean:match("{[^}]*$") then
+        context = "object"
+    end
+    print(context)
+
+    -- Find initial boundaries
+    local left_pos = before_cursor:reverse():find("[,%s\"'%({%[]")
+    if not left_pos then
+        left_pos = 0
+    end
+    left_pos = #before_cursor - left_pos + 1
+
+    local right_pos = after_cursor:find("[,%s\"'%)%}%]]")
+    if not right_pos then
+        right_pos = #after_cursor
+    else
+        right_pos = col + right_pos
+    end
+
+    -- Adjust boundaries based on context
+    if context == "function" or context == "arrow_function" then
+        -- Check for trailing comma first
+        local has_trailing_comma = line:sub(right_pos, right_pos) == ","
+        if has_trailing_comma then
+          print("has trailing comma")
+            -- Include the trailing comma in selection
+            right_pos = right_pos
+            left_pos = left_pos + 1
+        else
+            -- Check for leading comma
+            local has_leading_comma = line:sub(left_pos, left_pos) == ","
+            if has_leading_comma then
+                -- Include the leading comma in selection
+                left_pos = left_pos
+            else
+                -- No comma, just select the word
+                if line:sub(left_pos, left_pos):match("%s") then
+                    left_pos = left_pos + 1
+                end
+                if line:sub(right_pos, right_pos):match("%s") then
+                    right_pos = right_pos - 1
+                end
+            end
+        end
+    elseif context == "class" then
+        -- Check for trailing space first
+        if line:sub(right_pos, right_pos):match("%s") then
+            left_pos = left_pos + 1
+            right_pos = right_pos
+        -- If no trailing space, check for leading space
+        elseif line:sub(left_pos, left_pos):match("%s") then
+            -- Keep left_pos as is to include the leading space
+            left_pos = left_pos
+            right_pos = right_pos - 1
+        -- No spaces at all
+        else
+            left_pos = left_pos + 1  -- Skip the quote
+            right_pos = right_pos - 1
+        end
+    elseif context == "object" then
+        -- For objects, check if we're in a string
+        if line:sub(left_pos, left_pos):match("[\"']") then
+            -- Handle like class context
+            left_pos = left_pos + 1
+            if right_pos > 0 then
+                right_pos = right_pos - 1
+            end
+        else
+            -- Look for = and extend until comma if found
+            local has_equals = after_cursor:match("^[^,%)%}]*=")
+            if has_equals then
+                local next_comma = after_cursor:find("[,%)%}%]]")
+                if next_comma then
+                    right_pos = col + next_comma
+                end
+            end
+        end
+    end
+
+    -- Set visual selection
+    vim.api.nvim_win_set_cursor(0, {vim.fn.line('.'), left_pos - 1})
+    vim.cmd('normal! v')
+    vim.api.nvim_win_set_cursor(0, {vim.fn.line('.'), right_pos - 1})
+end
+
+-- Function to handle parameter motion in different modes
+local function param_motion(motion_type)
+    find_closest_param()
+end
+
+-- Normal mode mapping to initiate visual selection
+-- vim.keymap.set('n', 'q', function() param_motion('v') end, {silent = true, desc = "Select closest parameter"})
+--
+-- -- Visual mode mapping
+-- vim.keymap.set('x', 'q', function() param_motion('') end, {silent = true, desc = "Select closest parameter"})
+--
+-- -- Operator-pending mode mapping
+-- vim.keymap.set('o', 'q', function() param_motion('v') end, {silent = true, desc = "Select closest parameter"})
+
+local function incremental_backward_word_selection(motion_type)
+  -- Get current position
+  local line = vim.api.nvim_get_current_line()
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  local row, col = cursor_pos[1], cursor_pos[2]
+
+  -- Initialize visual mode if needed
+  if motion_type == 'v' then
+    -- Store the current position as a mark for extending selection
+    vim.cmd('normal! ml')
+    vim.cmd('normal! viw')
+    return
+  end
+
+  -- Get the current visual selection boundaries
+  local start_pos = vim.fn.getpos("'<")
+  local end_pos = vim.fn.getpos("'>")
+  local start_col = start_pos[3]
+
+  -- Get text before the selection
+  local text_before = string.sub(line, 1, start_col - 1)
+
+  -- Find the previous word boundary
+  local pattern = "()%s*[%w_]+%s*[,]?%s*$"
+  local match_start = text_before:match(pattern)
+
+  if match_start then
+    -- Extend selection to include the found pattern
+    vim.cmd('normal! o')
+    vim.cmd('normal! ' .. match_start .. '|')
+  end
+end
+
+-- vim.keymap.set('n', 'q', function() incremental_backward_word_selection('v') end, {silent = true, desc = "Incremental word selection"})
+-- vim.keymap.set('x', 'q', function() incremental_backward_word_selection('') end, {silent = true, desc = "Incremental word selection"})
+
+vim.api.nvim_create_user_command("Align", function(opts)
+  local start_line = opts.line1
+  local end_line = opts.line2
+  local col = tonumber(opts.args) or 1
+
+  -- Save cursor position
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+
+  for line = start_line, end_line do
+    vim.api.nvim_win_set_cursor(0, {line, 0})
+    -- from https://stackoverflow.com/a/8363443 it will go to beginning
+    -- find = add 100 spaces  is <Esc> (used c-v to insert the code)
+    -- then go the col cuantity of column with | and dw
+    vim.cmd('normal! 0f=100i ' .. col .. '|dw')
+  end
+
+  -- Restore cursor position
+  vim.api.nvim_win_set_cursor(0, cursor_pos)
+end, { range = true, nargs = "?" })

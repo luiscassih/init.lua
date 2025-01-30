@@ -1,27 +1,33 @@
 return {
   'mfussenegger/nvim-dap',
   event = "VeryLazy",
-  enabled = false, -- disabled by default
+  enabled = true, -- disabled by default
   dependencies = {
-    'rcarriga/nvim-dap-ui',
+    "igorlfs/nvim-dap-view",
+    -- 'rcarriga/nvim-dap-ui',
     -- 'theHamsta/nvim-dap-virtual-text',
     -- 'nvim-telescope/telescope-dap.nvim',
   },
   config = function()
-    local dap, dapui = require("dap"), require("dapui")
-    dapui.setup()
+    -- local dap, dapui = require("dap"), require("dapui")
+    local dap = require("dap")
+    local dapView = require("dap-view")
+    -- dapui.setup()
     -- dap.set_log_level('TRACE')
     dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
+      -- dapui.open()
     end
     dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
+      -- dapui.open()
+      dapView.open()
     end
     dap.listeners.before.event_terminated.dapui_config = function()
-      dapui.close()
+      -- dapui.close()
+      dapView.close()
     end
     dap.listeners.before.event_exited.dapui_config = function()
-      dapui.close()
+      -- dapui.close()
+      dapView.close()
     end
 
     vim.keymap.set("n", "<leader>dr", dap.continue, { desc = "Debugger: Continue" })
@@ -30,7 +36,7 @@ return {
     vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Debugger: Step over" })
     vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Debugger: Step into" })
     vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Debugger: Step out" })
-    vim.keymap.set({ "n", "v" }, "<leader>dh", dapui.eval, { desc = "Debugger: Evaluate word" })
+    -- vim.keymap.set({ "n", "v" }, "<leader>dh", dapui.eval, { desc = "Debugger: Evaluate word" })
 
     -- Configurations
     dap.adapters["pwa-node"] = {
@@ -52,6 +58,21 @@ return {
         program = "${file}",
         cwd = "${workspaceFolder}",
         runtimeExecutable = "node",
+      }
+    }
+
+    dap.adapters["gdb"] = {
+      type = "executable",
+      command = "gdb",
+      args = { "--silent", "-ex", "run", "-ex", "bt" }
+    }
+
+    dap.configurations.odin = {
+      {
+        type = "gdb",
+        name = "debug",
+        request = "launch",
+        program = "${file}"
       }
     }
   end,

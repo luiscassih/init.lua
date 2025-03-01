@@ -182,8 +182,8 @@ return {
 
     ins_left {
       function()
-        if (require("AniKakoune").isKakouneMode()) then
-          return "◎ Kak"
+        if (require("AniMotion").isActive()) then
+          return "◎ SEL"
         end
         return ""
       end,

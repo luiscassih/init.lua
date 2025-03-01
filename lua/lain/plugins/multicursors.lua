@@ -13,15 +13,15 @@ return
         vim.cmd.hi("link", "MultiCursorCursor", "Cursor")
         vim.cmd.hi("link", "MultiCursorVisual", "Visual")
 
-        vim.keymap.set("n", "<c-c>", function()
+        vim.keymap.set("n", "<Esc>", function()
             if mc.hasCursors() then
                 mc.clearCursors()
             else
                 -- default
-                local k = vim.api.nvim_replace_termcodes("<C-c>", true, false, true)
+                local k = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
                 vim.api.nvim_feedkeys(k, "n", false)
             end
-        end)
+        end, { noremap = false })
         -- vim.keymap.set("n", "<c-c>", [[mc.hasCursors? mc.clearCursors() : <c-c>]], {expr = true})
 
         -- add cursors above/below the main cursor

@@ -300,7 +300,11 @@ end
 local function quote_motion(motion_type)
     local quote = find_closest_quote()
     if quote then
+      if motion_type == "i" then
+        vim.cmd('normal! ' .. motion_type .. quote)
+      else
         vim.cmd('normal! f'.. quote .. motion_type .. quote)
+      end
     end
 end
 

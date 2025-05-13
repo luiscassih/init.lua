@@ -1,6 +1,6 @@
 return {
-  "luiscassih/AniKakoune",
-  -- dir = "~/dev/AniMotion/",
+  "luiscassih/AniMotion.nvim",
+  -- dir = "/mnt/DATA/bkup_fedora_before_nuke/dev/AniMotion/",
   enabled = true,
   event = "VeryLazy",
   config = function()

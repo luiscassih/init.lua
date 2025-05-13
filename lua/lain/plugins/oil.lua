@@ -74,5 +74,6 @@ return {
     -- Keymaps
     vim.keymap.set('n', "'", toggle_float_with_memory)
     vim.keymap.set('n', '"', open_file_dir)
+    vim.keymap.set('n', '<leader>o', "<cmd>Oil<cr>")
   end
 }

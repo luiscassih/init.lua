@@ -41,7 +41,7 @@ return {
     -- stylua: ignore
     local colors = {
       -- bg       = '#202328',
-      bg       = '#080808',
+      -- bg       = '#080808',
       fg       = '#bbc2cf',
       yellow   = '#ECBE7B',
       cyan     = '#008080',

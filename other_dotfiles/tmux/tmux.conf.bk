@@ -1,0 +1,86 @@
+# configs
+set -g mouse on
+set-option -g default-shell /bin/zsh
+
+# Start in same directory when splitting windows
+bind % split-window -h -c '#{pane_current_path}'
+bind '"' split-window -v -c '#{pane_current_path}'
+bind o new-window -c '#{pane_current_path}'
+
+set-window-option -g mode-keys vi
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
+# <cmd>silent !tmux display-popup -w 100\\% -h 40\\% -E "ts"<CR>
+bind -n C-s display-popup -w 100% -h 40% -y 100% -E "ts"
+# bind -n C-p display-popup -w 100% -h 40% -y 100% -E "rg --files --hidden | fzf | xargs v"
+
+# set -s default-terminal 'screen-256color'
+# set -s default-terminal 'tmux-256color'
+set -s default-terminal 'xterm-kitty'
+set -ga terminal-overrides ",*256col*:Tc"
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'catppuccin/tmux'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'github_username/plugin_name#branch'
+# set -g @plugin 'git@github.com:user/plugin'
+# set -g @plugin 'git@bitbucket.com:user/plugin'
+
+
+# other configs
+set -g prefix ^A
+set -g base-index 1
+set -g pane-active-border-style 'fg=magenta,bg=default'
+set -g pane-border-style 'fg=brightblack,bg=default'
+set -g set-clipboard on
+
+bind s split-window -v -c "#{pane_current_path}"
+bind v split-window -h -c "#{pane_current_path}"
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind -r -T prefix < resize-pane -L 20
+bind -r -T prefix > resize-pane -R 20
+bind -r -T prefix , resize-pane -D 7
+bind -r -T prefix . resize-pane -U 7
+bind c copy-mode
+
+# when https://github.com/catppuccin/tmux/pull/94 is approved
+# set -g @catppuccin_window_default_background "#161616"
+set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha
+
+# Don't forget to set the background in plugins/catppuccin-mocha.tmux to thm_bg="#0b0b12"
+
+set -g @catppuccin_window_left_separator ""
+set -g @catppuccin_window_right_separator " "
+set -g @catppuccin_window_middle_separator " █"
+set -g @catppuccin_window_number_position "right"
+set -g @catppuccin_window_default_fill "number"
+set -g @catppuccin_window_default_text "#W"
+set -g @catppuccin_window_current_fill "number"
+set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
+set -g @catppuccin_status_modules_right "directory date_time"
+set -g @catppuccin_status_modules_left "session"
+set -g @catppuccin_status_left_separator  " "
+set -g @catppuccin_status_right_separator " "
+set -g @catppuccin_status_right_separator_inverse "no"
+set -g @catppuccin_status_fill "icon"
+set -g @catppuccin_status_connect_separator "no"
+set -g @catppuccin_directory_text "#{pane_current_path}"
+# set -g @catppuccin_meetings_text "#($HOME/.config/tmux/scripts/cal.sh)"
+set -g @catppuccin_date_time_text "%H:%M"
+
+# set -g @catppuccin_window_default_color "#0000FF"
+#set -g @catppuccin_window_default_background "#000000"
+# set -g @catppuccin_window_default_background "#eff1f5"
+set -g @catppuccin_window_current_color "#f38ba8"
+set -g @catppuccin_window_current_background "#1e1e2e"
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.config/tmux/plugins/tpm/tpm'

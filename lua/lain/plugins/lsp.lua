@@ -12,21 +12,25 @@ return {
     -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
     local on_attach = function(client, bufnr)
-        local opts = { buffer = bufnr, remap = false }
-
-      vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-      vim.keymap.set("n", "gs", function() vim.cmd("vsplit"); vim.lsp.buf.definition() end, opts)
-      vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-      vim.keymap.set("n", "<leader>lws", function() vim.lsp.buf.workspace_symbol() end, opts)
-      vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, opts)
-      vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-      vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
-      vim.keymap.set({ 'v', 'n' }, "<leader>la", function() vim.lsp.buf.code_action() end, opts)
+      -- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+      vim.keymap.set("n", "gs", function() vim.cmd("vsplit"); vim.lsp.buf.definition() end, { desc = "Split Definition", buffer = bufnr, remap = false })
+      vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { desc = "Hover", buffer = bufnr, remap = false })
+      -- vim.keymap.set("n", "<leader>lws", function() vim.lsp.buf.workspace_symbol() end, opts)
+      vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, { desc = "Line Diagnostics", buffer = bufnr, remap = false })
+      vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next Diagnostic", buffer = bufnr, remap = false })
+      vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous Diagnostic", buffer = bufnr, remap = false })
+      vim.keymap.set({ 'v', 'n' }, "<leader>la", function() vim.lsp.buf.code_action() end, { desc = "Code Action", buffer = bufnr, remap = false })
       -- vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.references() end, opts)
-      vim.keymap.set("n", "<leader>lR", function() vim.lsp.buf.rename() end, opts)
+      vim.keymap.set("n", "<leader>lR", function() vim.lsp.buf.rename() end, { desc = "Rename", buffer = bufnr, remap = false })
       -- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-      vim.keymap.set("n", "<leader>R", ":LspRestart<CR>", opts)
-      vim.keymap.set({"n", "v"}, "<leader>f", vim.lsp.buf.format)
+      -- vim.keymap.set("n", "<leader>R", ":LspRestart<CR>", opts)
+      vim.keymap.set({"n", "v"}, "<leader>lf", vim.lsp.buf.format, { desc = "Format Selected" })
+      -- vim.keymap.set({"v"}, "<leader>lf", function() vim.lsp.buf.format({
+      --   range = {
+      --     ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+      --     ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+      --   }
+      -- }) end, { desc = "Format Selected" })
     end
     -- local capabilities = cmp_nvim_lsp.default_capabilities()
     local capabilities = vim.lsp.protocol.make_client_capabilities()

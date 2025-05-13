@@ -1,4 +1,6 @@
+local theme = require("lain.themes.nightfall")
 return {
+  theme,
   -- {
   --   "catppuccin/nvim",
   --   name = "catppuccin",

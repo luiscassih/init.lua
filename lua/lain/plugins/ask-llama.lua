@@ -1,6 +1,6 @@
 return {
   dir = "~/dev/Askllama/",
-  enabled = true,
+  enabled = false,
   dependencies = { "nvim-lua/plenary.nvim" },
   config = true,
 }
